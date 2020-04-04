@@ -1,9 +1,13 @@
 import React from 'react';
 
 function ConcertList() {
+   const title = 'concert list';
+   const concerts = ['megadeth, cult of luna'];
+
+   
   return (
     <div className="ConcertList">
-        <span>concert list</span>
+        <span>{title}</span>
     </div>
   );
 }
