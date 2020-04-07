@@ -6,9 +6,14 @@ function ConcertList() {
 
    
   return (
-    <div className="ConcertList">
-        <span>{title}</span>
-    </div>
+      <div>
+          <div className="ConcertList">
+            <span>{title}</span>
+          </div>
+          <div>
+              {concerts.map(concert => (<span key={concert}>{concert}</span>))}
+          </div>
+      </div>
   );
 }
 
