@@ -7,3 +7,9 @@ test('renders learn react link', () => {
   const linkElement = getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });
+
+test('renders each concert components', () => {
+  const { getByText } = render(<App />);
+  const linkElement = getByText(/megadeth/);
+  expect(linkElement).toBeInTheDocument();
+});
