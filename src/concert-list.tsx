@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
 
 function ConcertList() {
    const title = 'concert list';
-   const concerts = ['megadeth, cult of luna'];
+   const [concerts, setConcerts] = useState(['megadeth, cult of luna']);
 
-   
+   useEffect(() => {
+       setConcerts(['killSwitch Engage', 'amenra']);
+   }, [])
+
   return (
       <div>
           <div className="ConcertList">
