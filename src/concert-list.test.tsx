@@ -11,6 +11,6 @@ test('renders concert list component', () => {
 
 test('renders each concert components', () => {
   const { getByText } = render(<ConcertList />);
-  const linkElement = getByText(/megadeth/);
+  const linkElement = getByText(/amenra/);
   expect(linkElement).toBeInTheDocument();
 });
