@@ -5,6 +5,6 @@ import Menu from './menu';
 
 test('renders concert list component', () => {
   const { getByText } = render(<Menu />);
-  const linkElement = getByText(/around/);
+  const linkElement = getByText(/list/);
   expect(linkElement).toBeInTheDocument();
 });
