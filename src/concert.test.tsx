@@ -4,7 +4,7 @@ import Concert from './concert';
 
 test('renders concert list component', () => {
   const { getByText } = render(<Concert />);
-  const linkElement = getByText(/name/);
+  const linkElement = getByText(/title/);
   expect(linkElement).toBeInTheDocument();
 });
 
