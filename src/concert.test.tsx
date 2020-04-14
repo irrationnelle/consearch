@@ -8,3 +8,8 @@ test('renders concert list component', () => {
   expect(linkElement).toBeInTheDocument();
 });
 
+describe("concert component", () => {
+    test('has location information', () => {
+
+    })
+});
