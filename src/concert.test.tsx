@@ -10,6 +10,7 @@ test('renders concert list component', () => {
 
 describe("concert component", () => {
     test('has location information', () => {
+        const location = {x: 0, y: 0};
 
     })
 });
