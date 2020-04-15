@@ -1,7 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import ConcertList from "./concert-list";
+import Concert from "./concert";
 import './App.css';
+
+declare global {
+    interface Window {
+        kakao:any;
+    }
+}
 
 function App() {
   return (
@@ -21,6 +28,7 @@ function App() {
         </a>
       </header>
       <ConcertList/>
+      <Concert/>
     </div>
   );
 }
