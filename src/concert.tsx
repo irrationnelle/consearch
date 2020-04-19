@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
+
 import ConcertLocationMap from "./ConcertLocationMap";
 
 function Concert() {
   const title = 'cult of luna';
   const price = 10000;
   const [points, setPoints] = useState({x: 33.450701, y: 126.570667});
+  const [address, setAddress] = useState('제주특별자치도 제주시 첨단로 242');
 
   useEffect(() => {
       setPoints({x: 37.54839846253257, y: 126.92007036208365});
+
+      setTimeout(() => {
+          setAddress('서울특별시 마포구 서교동 홍익로 25');
+      }, 1500);
       }, [])
 
   return (
@@ -20,7 +26,7 @@ function Concert() {
           <span>price</span>
           <span>{price}</span>
         </div>
-        <ConcertLocationMap points={points} />
+        <ConcertLocationMap points={points} address={address} />
     </div>
   );
 }
