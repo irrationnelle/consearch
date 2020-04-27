@@ -1,4 +1,5 @@
 import React, { useState, useEffect }  from 'react';
+import Concert from './concert';
 
 function ConcertList() {
    const title = 'concert list';
@@ -14,7 +15,7 @@ function ConcertList() {
             <span>{title}</span>
           </div>
           <div>
-              {concerts.map(concert => (<span key={concert}>{concert}</span>))}
+              {concerts.map(concert => (<Concert key={concert} name={concert} />))}
           </div>
       </div>
   );
