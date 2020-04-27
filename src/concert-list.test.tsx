@@ -14,3 +14,9 @@ test('renders each concert components', () => {
   const linkElement = getByText(/amenra/);
   expect(linkElement).toBeInTheDocument();
 });
+
+test('renders each concert components', () => {
+  const { getByText } = render(<ConcertList />);
+  const linkElement = getByText(/killSwitch Engage/);
+  expect(linkElement).toBeInTheDocument();
+});
