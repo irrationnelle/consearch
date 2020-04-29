@@ -15,7 +15,7 @@ function ConcertList() {
             <span>{title}</span>
           </div>
           <div>
-              {concerts.map(concert => (<Concert key={concert} name={concert} />))}
+              {concerts.map(concert => (<span>{concert}</span>))}
           </div>
       </div>
   );
