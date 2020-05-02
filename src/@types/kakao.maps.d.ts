@@ -1,15 +1,14 @@
-declare namespace kakao.maps {
-    export class LatLng {
-        /**
-         * WGS84 좌표 정보를 가지고 있는 객체를 생성한다.
-         *
-         * @param latitude 위도
-         * @param longitude 경도
-         */
-        constructor(latitude: number, longitude: number)
-    }
+class LatLng {
+    /**
+     * WGS84 좌표 정보를 가지고 있는 객체를 생성한다.
+     *
+     * @param latitude 위도
+     * @param longitude 경도
+     */
+    constructor(latitude: number, longitude: number)
+}
 
-    export class Map {
+ class Map {
         /**
          * 지도를 생성한다.
          *
@@ -19,13 +18,11 @@ declare namespace kakao.maps {
         constructor(container: HTMLElement, options: MapOptions)
     }
 
-    declare namespace services {
-        export class Geocoder {
-            constructor()
-
-            addressSearch(address: string, callback: (result: any, status:any) => void) {
-            }
-        }
-    }
+interface Maps {
+    LatLng: LatLng,
+    Map: Map
 }
 
+export interface Kakao {
+    maps: Maps
+}
