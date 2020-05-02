@@ -8,7 +8,8 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <ConcertList/>
+        <ConcertList key={'uniqueKey'} />
+        <Concert key={'test'} name={'test'} />
     </div>
   );
 }
