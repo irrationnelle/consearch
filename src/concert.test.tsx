@@ -1,5 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent} from '@testing-library/react';
+import { Router, useLocation } from 'react-router-dom'
+import { createMemoryHistory } from 'history'
+import '@testing-library/jest-dom/extend-expect'
+
 import Concert from './concert';
 
 beforeAll(()=> {
@@ -36,17 +40,34 @@ beforeAll(()=> {
     });
 
     global.kakao.maps.services.Geocoder.prototype.addressSearch = jest.fn();
+    
+    jest.mock("react-router-dom", () => ({
+          ...jest.requireActual("react-router-dom"),
+              useLocation: jest.fn().mockReturnValue({
+                  pathname: '/another-route',
+                  search: '',
+                  hash: '',
+                  state: {test: "scream"},
+                  key: '5nvxpbdafa',
+                })
+            }))
 })
 
-test('renders concert list component', () => {
-  const { getByText } = render(<Concert />);
-  const linkElement = getByText(/title/);
-  expect(linkElement).toBeInTheDocument();
-});
 
 describe("concert component", () => {
+    test('renders concert list component', () => {
+      const history = createMemoryHistory()
+      const { container, getByText } = render(
+        <Router history={history}>
+          <Concert key={"test"} name={"test"} />
+        </Router>
+      )
+
+      const linkElement = getByText(/title/);
+      expect(linkElement).toBeInTheDocument();
+    });
+
     test('has location information', () => {
-        const location = {x: 0, y: 0};
 
     })
 });

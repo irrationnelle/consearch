@@ -1,5 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent} from '@testing-library/react';
+import { Router } from 'react-router-dom'
+import { createMemoryHistory } from 'history'
+import '@testing-library/jest-dom/extend-expect'
+
 import App from './App';
 
 beforeAll(()=> {
@@ -38,8 +42,19 @@ beforeAll(()=> {
     global.kakao.maps.services.Geocoder.prototype.addressSearch = jest.fn();
 })
 
-test('renders each concert components', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/amenra/);
-  expect(linkElement).toBeInTheDocument();
+test('full app rendering/navigating', () => {
+  const history = createMemoryHistory()
+  const { container, getByText } = render(
+    <Router history={history}>
+      <App />
+    </Router>
+  )
+  // verify page content for expected route
+  // often you'd use a data-testid or role query, but this is also possible
+  expect(container.innerHTML).toMatch('main')
+
+  fireEvent.click(getByText(/MyPage/i))
+
+  // check that the content changed to the new page
+  expect(container.innerHTML).toMatch("I'm rase")
 });
