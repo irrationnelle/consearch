@@ -1,4 +1,5 @@
 import React, { useState, useEffect }  from 'react';
+import { connect } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,8 +9,9 @@ import {
 } from "react-router-dom";
 
 import Concert from './concert';
+import { getSelector } from './selectors'
 
-function ConcertList() {
+function ConcertList(props: any) {
    const match = useRouteMatch();
    const title = 'concert list';
    const [concerts, setConcerts] = useState(['megadeth, cult of luna']);
@@ -18,6 +20,9 @@ function ConcertList() {
        setConcerts(['killSwitch Engage', 'amenra']);
 
        console.log('%cmatch: ', 'background: white; color: red;', match);
+       console.log('%cprops: ', 'background: white; color: blue;', props);
+
+       props.onTodoClick("rase");
    }, [])
 
   return (
@@ -54,4 +59,16 @@ function ConcertList() {
   );
 }
 
-export default ConcertList;
+const mapStateToProps = (state: any) => {
+  return {
+    counter: getSelector(state)
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+      onTodoClick: (id: string) => dispatch({type: "USER_FETCH_REQUESTED", payload: id})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConcertList);

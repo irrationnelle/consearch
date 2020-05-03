@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from "react-router-dom"
+import { History, Location } from "history";
 
 import ConcertLocationMap from "./ConcertLocationMap";
 
 function Concert(props: {key: string; name?: string;}) {
-  const history: any = useHistory();
-  const { state: test }: any = useLocation();
-  const title = props.name ? props.name : 'just concert';
-  const price = 10000;
+    const history: History = useHistory();
+    const {state: {test}}: Location<{test: string}> = useLocation();
+    const title = props.name ? props.name : 'just concert';
+    const price = 10000;
 
   const [points, setPoints] = useState({x: 33.450701, y: 126.570667});
   const [address, setAddress] = useState('제주특별자치도 제주시 첨단로 242');
@@ -23,8 +24,6 @@ function Concert(props: {key: string; name?: string;}) {
           setAddress('서울특별시 마포구 서교동 홍익로 25');
       }, 1500);
   }, [])
-
-  
 
   return (
     <div>
