@@ -1,7 +1,19 @@
-function counter(state = 0, action: {type: string; value: any;}) {
+const initialState: {
+    concerts: any[];
+} = {
+    concerts: []
+}
+function concert(state = initialState, action: {type: string; payload: {concerts: any[]};}) {
   switch (action.type) {
-    case "USER_FETCH_SUCCEEDED":
-      return state + 1
+    case "REQ_CONCERTS_SUCCEEDED":
+          return {
+              ...state,
+              concerts: [
+                  ...state.concerts,
+                  ...action.payload.concerts
+              ]
+
+          }
     case "USER_FETCH_FAILED":
       return state - 1
     case "USER_FETCH_REQUESTED":
@@ -12,4 +24,4 @@ function counter(state = 0, action: {type: string; value: any;}) {
   }
 }
 
-export default counter;
+export default concert;
