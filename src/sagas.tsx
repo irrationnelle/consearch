@@ -1,16 +1,14 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
-function* fetchUser(action: any) {
-    const fetchUser = (userId: string) => {console.log(userId)}
+function* fetchConcerts(action: any) {
+   const fetch = (userId: string) => {console.log(userId)}
 
    try {
-       console.log('this is saga');
-       console.log('%caction in saga: ', 'background: white; color: black;', action);
-      //const user = yield call(fetchUser, action.payload);
-      yield put({type: "USER_FETCH_SUCCEEDED", user: action.payload});
+      const concerts = yield call(fetch, action.payload);
+      yield put({type: "REQ_CONCERTS_SUCCEEDED", payload: concerts});
    } catch (e) {
-      yield put({type: "USER_FETCH_FAILED", message: e.message});
+      yield put({type: "REQ_CONCERTS_FAILED", message: e.message});
    }
 }
 
@@ -19,7 +17,7 @@ function* fetchUser(action: any) {
   Allows concurrent fetches of user.
 */
 function* mySaga() {
-  yield takeLatest("USER_FETCH_REQUESTED", fetchUser);
+  yield takeLatest("REQ_CONCERTS", fetchConcerts);
 }
 
 
