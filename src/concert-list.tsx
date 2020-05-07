@@ -23,6 +23,8 @@ function ConcertList(props: any) {
        console.log('%cprops: ', 'background: white; color: blue;', props);
 
        props.onTodoClick("rase");
+
+       console.log('%cconcerts: ', 'background: white; color: green;', props.concerts)
    }, [])
 
   return (
@@ -61,7 +63,7 @@ function ConcertList(props: any) {
 
 const mapStateToProps = (state: any) => {
   return {
-    counter: getSelector(state)
+    concerts: getSelector(state)
   }
 }
 
