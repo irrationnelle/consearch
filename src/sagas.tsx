@@ -21,4 +21,4 @@ function* mySaga() {
 }
 
 
-export default mySaga;
+export { mySaga, fetchConcerts };

@@ -1,29 +1,25 @@
-import { call, put, take, takeEvery, takeLatest } from 'redux-saga/effects'
-import deepEqual from 'deep-equal';
+import { fork, take, takeLatest } from 'redux-saga/effects'
+
+import { mySaga, fetchConcerts } from './sagas'
 
 const reqConcerts = () => ({
-  type: "REQ_CONCERTS"
+  type: "REQ_CONCERTS_2"
 });
-
-const fetchConcerts = (concerts) => ({type: "REQ_CONCERTS_SUCCEEDED", payload: concerts});
 
 
 function* fetchSaga() {
-  const action = yield take("REQ_CONCERTS");
+  const action = yield take(reqConcerts);
 }
 
-test('change color saga', assert => {
-  const gen = fetchSaga();
 
-  deepEqual(
-    gen.next().value,
-    take(reqConcerts),
-    'it should wait for a user to choose a color'
-  );
+test('fetch concerts', done => {
+  const gen = mySaga();
+    const expected = fork(takeLatest, 'REQ_CONCERTS', fetchConcerts)
 
-  deepEqual(
-    gen.next().done,
-    true,
-    'it should be done'
-  );
+    expect(gen.next().value).toMatchObject(takeLatest('REQ_CONCERTS', fetchConcerts));
+
+
+    expect(gen.next().done).toEqual(true);
+
+  done();
 });
