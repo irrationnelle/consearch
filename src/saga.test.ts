@@ -1,14 +1,15 @@
-import { fork, take, takeLatest } from 'redux-saga/effects'
+import { expectSaga } from "redux-saga-test-plan";
+import { call } from 'redux-saga/effects'
 
-import { mySaga, fetchConcerts } from './sagas'
+import { mySaga, api } from './sagas'
 
-test('fetch concerts', done => {
-  const gen = mySaga();
-    const expected = fork(takeLatest, 'REQ_CONCERTS', fetchConcerts)
+it("fetches concerts", () => {
+  const id = 42;
+  const user = { id, name: "Jeremy" };
 
-    expect(gen.next().value).toEqual(takeLatest('REQ_CONCERTS', fetchConcerts));
-
-    expect(gen.next().done).toEqual(true);
-
-  done();
-});
+  return expectSaga(mySaga)
+    .provide([[call(api, id), user]])
+    .put({ type: "REQ_CONCERTS_SUCCEEDED", payload: user })
+    .dispatch({ type: "REQ_CONCERTS", payload: id })
+    .silentRun();
+}); 
