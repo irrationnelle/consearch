@@ -1,4 +1,5 @@
 import { expectSaga } from "redux-saga-test-plan";
+import { throwError } from "redux-saga-test-plan/providers";
 import { call } from 'redux-saga/effects'
 
 import { mySaga, api } from './sagas'
@@ -14,3 +15,14 @@ it("fetches concerts", () => {
     .dispatch({ type: "REQ_CONCERTS", payload: id })
     .silentRun();
 }); 
+
+it("handles errors", () => {
+  const id = 42;
+  const error = new Error("Whoops");
+
+  return expectSaga(mySaga)
+    .provide([[call(api, id), throwError(error)]])
+    .put({ type: "REQ_CONCERTS_FAILED", message: error })
+    .dispatch({ type: "REQ_CONCERTS", payload: id })
+    .run();
+});

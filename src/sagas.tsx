@@ -10,7 +10,7 @@ function* fetchConcerts(action: any) {
       const concerts = yield call(api, action.payload);
       yield put({type: "REQ_CONCERTS_SUCCEEDED", payload: concerts});
    } catch (e) {
-      yield put({type: "REQ_CONCERTS_FAILED", message: e.message});
+      yield put({type: "REQ_CONCERTS_FAILED", message: e});
    }
 }
 
