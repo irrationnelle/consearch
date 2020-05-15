@@ -36,26 +36,29 @@ beforeAll(()=> {
     global.kakao.maps.services.Geocoder = jest.fn().mockImplementation(function () {
         return {
             addressSearch: jest.fn()
-        }   
+        }
     });
 
     global.kakao.maps.services.Geocoder.prototype.addressSearch = jest.fn();
-    
-    jest.mock("react-router-dom", () => ({
-          ...jest.requireActual("react-router-dom"),
-              useLocation: jest.fn().mockReturnValue({
-                  pathname: '/another-route',
-                  search: '',
-                  hash: '',
-                  state: {test: "scream"},
-                  key: '5nvxpbdafa',
-                })
-            }))
+
+
 })
 
 
 describe("concert component", () => {
     test('renders concert list component', () => {
+        jest.mock("react-router-dom", () => ({
+            ...jest.requireActual("react-router-dom"),
+
+            useLocation: () => ({
+                pathname: '/another-route',
+                search: '',
+                hash: '',
+                state: {test: "scream"},
+                key: '5nvxpbdafa',
+            })
+        }))
+
       const history = createMemoryHistory()
       const { container, getByText } = render(
         <Router history={history}>
