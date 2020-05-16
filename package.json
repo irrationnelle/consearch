@@ -51,6 +51,7 @@
     "@storybook/addons": "^5.3.18",
     "@storybook/preset-create-react-app": "^2.1.1",
     "@storybook/react": "^5.3.18",
-    "redux-saga-test-plan": "^4.0.0-rc.3"
+    "redux-saga-test-plan": "^4.0.0-rc.3",
+    "ts-jest": "^26.0.0"
   }
 }

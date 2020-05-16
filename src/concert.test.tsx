@@ -3,8 +3,11 @@ import { render, fireEvent} from '@testing-library/react';
 import { Router, useLocation } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import '@testing-library/jest-dom/extend-expect'
+import { mocked } from 'ts-jest/utils'
 
 import Concert from './concert';
+
+
 
 beforeAll(()=> {
      global.kakao = jest.fn().mockImplementation(()=>{
@@ -41,23 +44,23 @@ beforeAll(()=> {
 
     global.kakao.maps.services.Geocoder.prototype.addressSearch = jest.fn();
 
-
+    jest.mock("react-router-dom", () => ({
+        ...jest.requireActual("react-router-dom"),
+        useLocation: () => ({
+            pathname: '/another-route',
+            search: '',
+            hash: '',
+            state: {test: "scream"},
+            key: '5nvxpbdafa',
+        })
+    }))
 })
 
 
 describe("concert component", () => {
-    test('renders concert list component', () => {
-        jest.mock("react-router-dom", () => ({
-            ...jest.requireActual("react-router-dom"),
+    it('renders concert list component', () => {
 
-            useLocation: () => ({
-                pathname: '/another-route',
-                search: '',
-                hash: '',
-                state: {test: "scream"},
-                key: '5nvxpbdafa',
-            })
-        }))
+        const mocked2 = mocked(useLocation, true);
 
       const history = createMemoryHistory()
       const { container, getByText } = render(
@@ -69,8 +72,4 @@ describe("concert component", () => {
       const linkElement = getByText(/title/);
       expect(linkElement).toBeInTheDocument();
     });
-
-    test('has location information', () => {
-
-    })
 });
