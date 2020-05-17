@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent} from '@testing-library/react';
 import { Router, useLocation } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
-import '@testing-library/jest-dom/extend-expect'
+
 import { mocked } from 'ts-jest/utils'
 
 import Concert from './concert';
@@ -60,7 +60,9 @@ beforeAll(()=> {
 describe("concert component", () => {
     it('renders concert list component', () => {
 
-        const mocked2 = mocked(useLocation, true);
+        // const mocked2 = mocked(useLocation, true);
+        console.log(mocked(useLocation));
+
 
       const history = createMemoryHistory()
       const { container, getByText } = render(
