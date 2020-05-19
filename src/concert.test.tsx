@@ -8,7 +8,6 @@ import { mocked } from 'ts-jest/utils'
 
 import Concert from './concert';
 
-
 jest.mock("react-router-dom", () => ({
   useLocation: jest.fn()
 }));
@@ -64,7 +63,6 @@ beforeAll(()=> {
 
 const mockUseLocation = useLocation as jest.Mock;
 
-
 describe("concert component", () => {
     it('renders concert list component', async (done) => {
 
@@ -81,9 +79,9 @@ describe("concert component", () => {
 
         console.log(result.current);
 
+        expect((result.current.state as any).test).toEqual("scream");
 
-
-      const history = createMemoryHistory()
+        const history = createMemoryHistory()
       const { container, getByText } = render(
         <Router history={history}>
           <Concert key={"test"} name={"test"} />
@@ -92,7 +90,6 @@ describe("concert component", () => {
 
       const linkElement = getByText(/title/);
       expect(linkElement).toBeInTheDocument();
-
         done();
     });
 });
