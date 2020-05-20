@@ -8,7 +8,6 @@ function Concert(props: {key: string; name?: string;}) {
     const history: History = useHistory();
     const {state: test}: Location<{test: string}> = useLocation();
     const location: Location<{test: string}> = useLocation();
-    const title = props.name ? props.name : 'just concert';
     const price = 10000;
 
   const [points, setPoints] = useState({x: 33.450701, y: 126.570667});
