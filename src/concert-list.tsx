@@ -11,24 +11,27 @@ import {
 import Concert from './concert';
 import { getSelector } from './selectors'
 
+interface ConcertJson {
+    title: string;
+    id: number;
+}
+
+type ConcertJsonList = ConcertJson[];
+
 function ConcertList(props: any) {
    const match = useRouteMatch();
-   const title = 'concert list';
-   const [concerts, setConcerts] = useState(['megadeth, cult of luna']);
+   const [ concerts, setConcerts ] = useState<ConcertJsonList>([]);
 
    useEffect(() => {
-       setConcerts(['killSwitch Engage', 'amenra']);
-
-       console.log('%cmatch: ', 'background: white; color: red;', match);
-       console.log('%cprops: ', 'background: white; color: blue;', props);
+       const exampleConcerts: ConcertJsonList = [{title: 'amenra', id: 1}, {title: 'tesseract', id: 2}]
+       setConcerts(exampleConcerts);
 
        props.onTodoClick("rase");
-
-       console.log('%cconcerts: ', 'background: white; color: green;', props.concerts)
    }, [])
 
   return (
         <div>
+             <span>concert list</span>
               <Route
                 path={match.path + '/:nameOfConcert'}
                 component={Concert}
@@ -44,12 +47,12 @@ function ConcertList(props: any) {
                               <div>
                                   <Link to={
                                       {
-                                          pathname: `${match.url}/${concert}`,
-                                          state: { test: concert }
+                                          pathname: `${match.url}/${concert.id}`,
+                                          state: { title: concert.title }
                                       }
                                     }
                                   >
-                                    {concert}
+                                    {concert.title}
                                   </Link><br/>
                               </div>)
                             )

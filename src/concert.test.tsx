@@ -1,16 +1,19 @@
 import React from 'react';
 import { render, fireEvent} from '@testing-library/react';
 import { renderHook, act } from "@testing-library/react-hooks";
-import { Router, useLocation } from 'react-router-dom'
+import { Router, MemoryRouter , useLocation } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 
 import { mocked } from 'ts-jest/utils'
 
 import Concert from './concert';
+import ConcertList from './concert-list';
 
+/*
 jest.mock("react-router-dom", () => ({
   useLocation: jest.fn()
 }));
+ */
 
 beforeAll(()=> {
      global.kakao = jest.fn().mockImplementation(()=>{
@@ -61,9 +64,12 @@ beforeAll(()=> {
      */
 })
 
+/*
 const mockUseLocation = useLocation as jest.Mock;
+ */
 
 describe("concert component", () => {
+    /*
     it('renders concert list component', async (done) => {
 
         // const mocked2 = mocked(useLocation, true);
@@ -92,4 +98,24 @@ describe("concert component", () => {
       expect(linkElement).toBeInTheDocument();
         done();
     });
+     */
+
+    it('full app rendering/navigating', () => {
+      //given
+      const history = createMemoryHistory()
+      const { container, getByText } = render(
+        <MemoryRouter history={history}>
+          <ConcertList />
+        </MemoryRouter>
+      )
+
+      expect(container.innerHTML).toMatch('concert list')
+
+      //when
+      // 여기서 클릭하기 위한 text를 가진 값이 없다. 즉 mocking 을 해서 만들어야 한다.
+      fireEvent.click(getByText(/amenra/i))
+
+      //then
+      expect(container.innerHTML).toMatch('amenra')
+    })
 });

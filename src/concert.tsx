@@ -6,8 +6,7 @@ import ConcertLocationMap from "./ConcertLocationMap";
 
 function Concert(props: {key: string; name?: string;}) {
     const history: History = useHistory();
-    const {state: test}: Location<{test: string}> = useLocation();
-    const location: Location<{test: string}> = useLocation();
+    const {state: { title }}: Location<{title: string}> = useLocation();
     const price = 10000;
 
   const [points, setPoints] = useState({x: 33.450701, y: 126.570667});
@@ -23,9 +22,6 @@ function Concert(props: {key: string; name?: string;}) {
       setTimeout(() => {
           setAddress('서울특별시 마포구 서교동 홍익로 25');
       }, 1500);
-
-      console.log(location);
-
   }, [])
 
   return (
@@ -33,7 +29,7 @@ function Concert(props: {key: string; name?: string;}) {
         <button onClick={goBack}>back</button>
         <div>
           <span>title</span>
-          <span>{test}</span>
+          <span>{title}</span>
         </div>
         <div>
           <span>price</span>
