@@ -43,8 +43,8 @@ function ConcertList(props: any) {
                   <div>
                       <div>concert list</div>
                       <div>{
-                          concerts.map(concert => (
-                              <div>
+                          concerts.map((concert, index) => (
+                              <div key={index}>
                                   <Link to={
                                       {
                                           pathname: `${match.url}/${concert.id}`,
