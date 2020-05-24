@@ -100,6 +100,7 @@ describe("concert component", () => {
     });
      */
 
+    /*
     // 근데 왜 이거 concert-list.text.tsx 가 아니라 여기에 있는 거지?
     it('콘서트 리스트에서 콘서트를 클릭하면 콘서트로 이동한다.', () => {
       //given
@@ -119,4 +120,5 @@ describe("concert component", () => {
       //then
       expect(container.innerHTML).toMatch('amenra')
     })
+        */
 });

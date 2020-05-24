@@ -36,7 +36,7 @@ beforeAll(()=> {
     global.kakao.maps.services.Geocoder = jest.fn().mockImplementation(function () {
         return {
             addressSearch: jest.fn()
-        }   
+        }
     });
 
     global.kakao.maps.services.Geocoder.prototype.addressSearch = jest.fn();
