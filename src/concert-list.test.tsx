@@ -1,10 +1,9 @@
 import React from 'react';
-import { fireEvent} from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom/extend-expect'
 import {createStore} from 'redux'
 import { Provider } from 'react-redux'
-import { shallow, mount, render } from 'enzyme';
 
 import ConcertList from './concert-list';
 
@@ -48,7 +47,7 @@ describe("concert list component", () => {
       //given
       const store = createStore(reducer);
 
-      const concertListComponent = shallow(
+      const {container, getByText} = render(
           <Provider store={store}>
             <MemoryRouter>
               <ConcertList />
@@ -56,17 +55,17 @@ describe("concert list component", () => {
           </Provider>
       )
 
-      expect(concertListComponent.text).toContain('concert list')
+      expect(container.innerHTML).toMatch('concert list')
 
       //when
       // 여기서 클릭하기 위한 text를 가진 값이 없다. 즉 mocking 을 해서 만들어야 한다.
       // 현재는 하드코딩된 값으로 'amenra' 라는 값이 존재하지만 이후에는
       // 서버와 통신해서 받아올 때마다 동적인 값을 가지고 있을 것
       // 따라서 getByText 를 사용하지 않거나 mocking 이 필요하다.
-      //fireEvent.click(concertListComponent.(/amenra/i))
+      fireEvent.click(getByText(/amenra/i))
 
       //then
-      //expect(container.innerHTML).toMatch('amenra')
+      expect(container.innerHTML).toMatch('amenra')
     })
 });
 
