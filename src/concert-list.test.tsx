@@ -3,18 +3,29 @@ import { fireEvent, render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { mocked } from 'ts-jest/utils'
 
 import ConcertList from './concert-list';
 import reducer from './reducers'
 
+import { getConcerts } from './fakeApi';
+
+jest.mock('./fakeApi')
+
+let mockConcertData: {title: string; id: number};
+
 beforeAll(()=> {
-    global.kakao = jest.fn();
-    global.kakao.maps = jest.fn();
-    global.kakao.maps.LatLng = jest.fn();
-    global.kakao.maps.Map = jest.fn();
-    global.kakao.maps.services = jest.fn();
-    global.kakao.maps.services.Geocoder = jest.fn();
-    global.kakao.maps.services.Geocoder.prototype.addressSearch = jest.fn();
+    (global as any).kakao = jest.fn();
+    (global as any).kakao.maps = jest.fn();
+    (global as any).kakao.maps.LatLng = jest.fn();
+    (global as any).kakao.maps.Map = jest.fn();
+    (global as any).kakao.maps.services = jest.fn();
+    (global as any).kakao.maps.services.Geocoder = jest.fn();
+    (global as any).kakao.maps.services.Geocoder.prototype.addressSearch = jest.fn();
+
+    mockConcertData = {title: 'baroness', id: 1};
+
+    mocked(getConcerts).mockImplementationOnce(() => [mockConcertData]);
 })
 
 describe("concert list", () => {
@@ -33,14 +44,10 @@ describe("concert list", () => {
       expect(container.innerHTML).toMatch('concert list')
 
       //when
-      // 여기서 클릭하기 위한 text를 가진 값이 없다. 즉 mocking 을 해서 만들어야 한다.
-      // 현재는 하드코딩된 값으로 'amenra' 라는 값이 존재하지만 이후에는
-      // 서버와 통신해서 받아올 때마다 동적인 값을 가지고 있을 것
-      // 따라서 getByText 를 사용하지 않거나 mocking 이 필요하다.
-      fireEvent.click(getByText(/amenra/i))
+      fireEvent.click(getByText(mockConcertData.title))
 
       //then
-      expect(container.innerHTML).toMatch('amenra')
+      expect(container.innerHTML).toMatch(mockConcertData.title);
     })
 });
 
