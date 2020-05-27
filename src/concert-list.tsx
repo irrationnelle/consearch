@@ -10,6 +10,7 @@ import {
 
 import Concert from './concert';
 import { getSelector } from './selectors'
+import { getConcerts } from './fakeApi';
 
 interface ConcertJson {
     title: string;
@@ -23,7 +24,7 @@ function ConcertList(props: any) {
    const [ concerts, setConcerts ] = useState<ConcertJsonList>([]);
 
    useEffect(() => {
-       const exampleConcerts: ConcertJsonList = [{title: 'amenra', id: 1}, {title: 'tesseract', id: 2}]
+       const exampleConcerts: ConcertJsonList = getConcerts();
        setConcerts(exampleConcerts);
 
        props.onTodoClick("rase");
