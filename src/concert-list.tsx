@@ -1,12 +1,6 @@
 import React, { useState, useEffect }  from 'react';
-import { connect } from 'react-redux'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-} from "react-router-dom";
+import { connect, useSelector } from 'react-redux'
+import { Route, Link, useRouteMatch} from "react-router-dom";
 
 import Concert from './concert';
 import { getSelector } from './selectors'
@@ -22,10 +16,12 @@ type ConcertJsonList = ConcertJson[];
 function ConcertList(props: any) {
    const match = useRouteMatch();
    const [ concerts, setConcerts ] = useState<ConcertJsonList>([]);
+   const exampleConcerts = useSelector(getSelector);
 
    useEffect(() => {
-       const exampleConcerts: ConcertJsonList = getConcerts();
-       setConcerts(exampleConcerts);
+       //const exampleConcerts: ConcertJsonList = useSelector(getSelector);
+       console.log(exampleConcerts);
+       //setConcerts(exampleConcerts.concerts);
 
        props.onTodoClick("rase");
    }, [])
@@ -44,7 +40,7 @@ function ConcertList(props: any) {
                   <div>
                       <div>concert list</div>
                       <div>{
-                          concerts.map((concert, index) => (
+                          exampleConcerts.concerts.map((concert, index) => (
                               <div key={index}>
                                   <Link to={
                                       {
