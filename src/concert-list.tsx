@@ -1,29 +1,26 @@
-import React, { useState, useEffect }  from 'react';
-import { connect, useSelector } from 'react-redux'
+import React, { useEffect, useState }  from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { Route, Link, useRouteMatch} from "react-router-dom";
 
 import Concert from './concert';
 import { getSelector } from './selectors'
-import { getConcerts } from './fakeApi';
 
-interface ConcertJson {
+interface ConcertType {
+    id: string;
     title: string;
-    id: number;
+    artist: string;
+    address: string;
+    price: number;
 }
 
-type ConcertJsonList = ConcertJson[];
-
-function ConcertList(props: any) {
+function ConcertList() {
+   const dispatch = useDispatch();
    const match = useRouteMatch();
-   const [ concerts, setConcerts ] = useState<ConcertJsonList>([]);
-   const exampleConcerts = useSelector(getSelector);
+   //const [ concerts, setConcerts ] = useState<Concert[]>([]);
+   const {concerts} = useSelector(getSelector);
 
    useEffect(() => {
-       //const exampleConcerts: ConcertJsonList = useSelector(getSelector);
-       console.log(exampleConcerts);
-       //setConcerts(exampleConcerts.concerts);
-
-       props.onTodoClick("rase");
+       dispatch({type: "REQ_CONCERTS"})
    }, [])
 
   return (
@@ -40,12 +37,12 @@ function ConcertList(props: any) {
                   <div>
                       <div>concert list</div>
                       <div>{
-                          exampleConcerts.concerts.map((concert, index) => (
+                          concerts.map((concert: ConcertType, index: number) => (
                               <div key={index}>
                                   <Link to={
                                       {
                                           pathname: `${match.url}/${concert.id}`,
-                                          state: { title: concert.title }
+                                          state: { title: concert.title, price: concert.price }
                                       }
                                     }
                                   >
@@ -61,16 +58,4 @@ function ConcertList(props: any) {
   );
 }
 
-const mapStateToProps = (state: any) => {
-  return {
-    concerts: getSelector(state)
-  }
-}
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-      onTodoClick: (id: string) => dispatch({type: "USER_FETCH_REQUESTED", payload: id})
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConcertList);
+export default ConcertList;

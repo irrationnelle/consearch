@@ -1,5 +1,12 @@
+interface Concert {
+    title: string;
+    artist: string;
+    address: string;
+    price: number;
+}
+
 const initialState: {
-    concerts: any[];
+    concerts: Concert[];
 } = {
     concerts: [{
         title: "last live",
@@ -14,22 +21,18 @@ const initialState: {
         price: 30000
     }]
 }
-function concert(state = initialState, action: {type: string; payload: {concerts: any[]};}) {
+
+function concert(state = initialState, action: {type: string; payload: {concerts: Concert[]};}) {
   switch (action.type) {
     case "REQ_CONCERTS_SUCCEEDED":
-          return {
+        console.log(action);
+        return {
               ...state,
               concerts: [
-                  ...state.concerts,
                   ...action.payload.concerts
               ]
 
           }
-    case "USER_FETCH_FAILED":
-        return {
-        ...state,
-        concerts: []
-    };
     default:
       return state
   }
