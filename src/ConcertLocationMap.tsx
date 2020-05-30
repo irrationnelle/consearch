@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 import { CustomWindow } from "./@types/custom.window";
 
@@ -8,7 +8,7 @@ interface Props {
     points: {
         x: number;
         y: number;
-    },
+    };
     address: string;
 }
 
@@ -18,8 +18,9 @@ function ConcertLocationMap(props: Props) {
 
         const { kakao } = window;
 
-        const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-        const options = { //지도를 생성할 때 필요한 기본 옵션
+        const container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
+        const options = {
+            //지도를 생성할 때 필요한 기본 옵션
             center: new kakao.maps.LatLng(points.x, points.y), //지도의 중심좌표.
             level: 3 //지도의 레벨(확대, 축소 정도)
         };
@@ -30,10 +31,8 @@ function ConcertLocationMap(props: Props) {
 
         // 주소로 좌표를 검색합니다
         geocoder.addressSearch(address, function(result: any, status: any) {
-
             // 정상적으로 검색이 완료됐으면
             if (status === kakao.maps.services.Status.OK) {
-
                 const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
                 // 결과값으로 받은 위치를 마커로 표시합니다
@@ -44,7 +43,8 @@ function ConcertLocationMap(props: Props) {
 
                 // 인포윈도우로 장소에 대한 설명을 표시합니다
                 const infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">공연장</div>'
+                    content:
+                        '<div style="width:150px;text-align:center;padding:6px 0;">공연장</div>'
                 });
                 infowindow.open(map, marker);
 
@@ -52,13 +52,9 @@ function ConcertLocationMap(props: Props) {
                 map.setCenter(coords);
             }
         });
+    }, [props.points, props.address]);
 
-    }, [props.points, props.address])
-
-    return (
-            <div id="map" style={{width: '500px', height:'400px'}} />
-    );
+    return <div id="map" style={{ width: "500px", height: "400px" }} />;
 }
 
 export default ConcertLocationMap;
-

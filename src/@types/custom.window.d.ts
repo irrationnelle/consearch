@@ -1,3 +1,3 @@
 export interface CustomWindow extends Window {
-    kakao: Kakao
+    kakao: Kakao;
 }
