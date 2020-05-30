@@ -8,12 +8,11 @@ it("fetches concerts", () => {
   const id = 42;
   const user = { id, name: "Jeremy" };
   const user2 = { id, name: "Henry" };
-  const concerts =[{ id: 1, title: 'behemoth', price: 20000, address: 'norway' }, {id: 2, title: 'shining', price: 10000, address: "poland"}]
-
+  const concerts =[{ id: 1, title: 'behemoth', artist: 'behemoth', price: 20000, address: 'norway' }, {id: 2, title: 'shining', artist: 'shining', price: 10000, address: "poland"}];
 
   return expectSaga(mySaga)
     //.provide([[call(api, id), user]])
-    .put({ type: "REQ_CONCERTS_SUCCEEDED", payload: concerts })
+    .put({ type: "REQ_CONCERTS_SUCCEEDED", payload: {concerts} })
     .dispatch({ type: "REQ_CONCERTS", payload: id })
     .silentRun();
 }); 
