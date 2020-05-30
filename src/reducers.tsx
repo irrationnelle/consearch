@@ -38,4 +38,4 @@ function concert(state = initialState, action: {type: string; payload: {concerts
   }
 }
 
-export default concert;
+export {initialState, concert};

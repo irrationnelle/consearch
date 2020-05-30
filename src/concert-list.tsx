@@ -1,9 +1,9 @@
-import React, { useEffect, useState }  from 'react';
+import React, { useEffect }  from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Route, Link, useRouteMatch} from "react-router-dom";
+import { Route, Link, useRouteMatch } from "react-router-dom";
 
 import Concert from './concert';
-import { getSelector } from './selectors'
+import { concertsSelector } from './selectors'
 
 interface ConcertType {
     id: string;
@@ -17,11 +17,11 @@ function ConcertList() {
    const dispatch = useDispatch();
    const match = useRouteMatch();
    //const [ concerts, setConcerts ] = useState<Concert[]>([]);
-   const {concerts} = useSelector(getSelector);
+   const concerts = useSelector(concertsSelector);
 
    useEffect(() => {
        dispatch({type: "REQ_CONCERTS"})
-   }, [])
+   }, [dispatch])
 
   return (
         <div>
