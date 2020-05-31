@@ -2,6 +2,8 @@ import React from "react";
 import ConcertList from "./concert-list";
 import { render, fireEvent } from "./helpers/test-utils";
 
+import { mockConcerts } from "./__mock__/data";
+
 interface Concert {
     id: number;
     title: string;
@@ -14,22 +16,7 @@ describe("concert list", () => {
     it("콘서트 리스트에서 콘서트를 클릭하면 콘서트로 이동한다.", () => {
         //given
         const initialState: { concerts: Concert[] } = {
-            concerts: [
-                {
-                    id: 1,
-                    title: "behemoth and niklas",
-                    artist: "behemoth",
-                    address: "poland",
-                    price: 10000
-                },
-                {
-                    id: 2,
-                    title: "leprous",
-                    artist: "leprous",
-                    address: "norway",
-                    price: 30000
-                }
-            ]
+            concerts: mockConcerts
         };
 
         const { container, getByText } = render(<ConcertList />, {
@@ -39,9 +26,9 @@ describe("concert list", () => {
         expect(container.innerHTML).toMatch("concert list");
 
         //when
-        fireEvent.click(getByText(/leprous/i));
+        fireEvent.click(getByText(mockConcerts[0].title));
 
         //then
-        expect(container.innerHTML).toMatch("leprous");
+        expect(container.innerHTML).toMatch(mockConcerts[0].title);
     });
 });

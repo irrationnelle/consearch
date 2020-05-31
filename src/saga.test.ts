@@ -4,25 +4,11 @@ import { call } from "redux-saga/effects";
 
 import { retrieveConcerts } from "./api/concert";
 import { mySaga } from "./sagas";
+import { mockConcerts } from "./__mock__/data";
 
 it("fetches concerts", () => {
     const id = 1;
-    const concerts = [
-        {
-            id: 1,
-            title: "behemoth",
-            artist: "behemoth",
-            price: 20000,
-            address: "norway"
-        },
-        {
-            id: 2,
-            title: "shining",
-            artist: "shining",
-            price: 10000,
-            address: "poland"
-        }
-    ];
+    const concerts = mockConcerts;
 
     return (
         expectSaga(mySaga)
