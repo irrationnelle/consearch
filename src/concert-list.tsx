@@ -4,14 +4,7 @@ import { Route, Link, useRouteMatch } from "react-router-dom";
 
 import Concert from "./concert";
 import { concertsSelector } from "./selectors";
-
-interface ConcertType {
-    id: string;
-    title: string;
-    artist: string;
-    address: string;
-    price: number;
-}
+import { Concert as ConcertType } from "./@models/concert";
 
 function ConcertList() {
     const dispatch = useDispatch();

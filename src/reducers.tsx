@@ -1,27 +1,9 @@
-interface Concert {
-    title: string;
-    artist: string;
-    address: string;
-    price: number;
-}
+import { Concert } from "./@models/concert";
 
 const initialState: {
     concerts: Concert[];
 } = {
-    concerts: [
-        {
-            title: "last live",
-            artist: "amenra",
-            address: "서울시청",
-            price: 10000
-        },
-        {
-            title: "debut live",
-            artist: "leprous",
-            address: "인천 국제 공항",
-            price: 30000
-        }
-    ]
+    concerts: []
 };
 
 function concert(
@@ -35,6 +17,7 @@ function concert(
                 ...state,
                 concerts: [...action.payload.concerts]
             };
+        case "REQ_CONCERTS_FAILED":
         default:
             return state;
     }

@@ -4,14 +4,6 @@ import { History, Location } from "history";
 
 import ConcertLocationMap from "./ConcertLocationMap";
 
-interface Concert {
-    id: string;
-    title: string;
-    artist: string;
-    address: string;
-    price: number;
-}
-
 function Concert(props: { key: string; name?: string }) {
     const history: History = useHistory();
 
