@@ -16,11 +16,10 @@ interface ConcertType {
 function ConcertList() {
     const dispatch = useDispatch();
     const match = useRouteMatch();
-    //const [ concerts, setConcerts ] = useState<Concert[]>([]);
     const concerts = useSelector(concertsSelector);
 
     useEffect(() => {
-        dispatch({ type: "REQ_CONCERTS" });
+        dispatch({ type: "REQ_CONCERTS", payload: { id: 1 } });
     }, [dispatch]);
 
     return (
