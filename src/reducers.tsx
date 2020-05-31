@@ -12,7 +12,6 @@ function concert(
 ) {
     switch (action.type) {
         case "REQ_CONCERTS_SUCCEEDED":
-            console.log(action);
             return {
                 ...state,
                 concerts: [...action.payload.concerts]

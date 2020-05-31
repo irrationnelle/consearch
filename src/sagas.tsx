@@ -5,7 +5,6 @@ import { Concert } from "./@models/concert";
 
 function* fetchConcerts(action: any) {
     try {
-        console.log(action);
         const concerts: Concert[] = yield call(
             retrieveConcerts,
             action.payload.id
