@@ -1,6 +1,6 @@
 import React from "react";
 import ConcertList from "./concert-list";
-import { render, fireEvent } from "./test-utils";
+import { render, fireEvent } from "./helpers/test-utils";
 
 interface Concert {
     id: number;
@@ -9,16 +9,6 @@ interface Concert {
     address: string;
     price: number;
 }
-
-beforeAll(() => {
-    (global as any).kakao = jest.fn();
-    (global as any).kakao.maps = jest.fn();
-    (global as any).kakao.maps.LatLng = jest.fn();
-    (global as any).kakao.maps.Map = jest.fn();
-    (global as any).kakao.maps.services = jest.fn();
-    (global as any).kakao.maps.services.Geocoder = jest.fn();
-    (global as any).kakao.maps.services.Geocoder.prototype.addressSearch = jest.fn();
-});
 
 describe("concert list", () => {
     it("콘서트 리스트에서 콘서트를 클릭하면 콘서트로 이동한다.", () => {

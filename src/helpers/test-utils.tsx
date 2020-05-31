@@ -4,7 +4,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 
-import { initialState as reducerInitialState, concert } from "./reducers";
+import { initialState as reducerInitialState, concert } from "../reducers";
 
 const render = (
     ui: any,

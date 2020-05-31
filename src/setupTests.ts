@@ -2,4 +2,19 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom/extend-expect';
+import "@testing-library/jest-dom/extend-expect";
+import { CustomWindow } from "./@types/custom.window";
+
+declare let window: CustomWindow;
+
+window.kakao = {
+    maps: {
+        LatLng: jest.fn(),
+        Map: jest.fn(),
+        services: {
+            Geocoder: jest.fn().mockImplementation(() => ({
+                addressSearch: jest.fn()
+            }))
+        }
+    }
+};

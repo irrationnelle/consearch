@@ -1,16 +1,6 @@
 import React from "react";
 import ConcertList from "./concert-list";
-import { render, fireEvent } from "./test-utils";
-
-beforeAll(() => {
-    global.kakao = jest.fn();
-    global.kakao.maps = jest.fn();
-    global.kakao.maps.LatLng = jest.fn();
-    global.kakao.maps.Map = jest.fn();
-    global.kakao.maps.services = jest.fn();
-    global.kakao.maps.services.Geocoder = jest.fn();
-    global.kakao.maps.services.Geocoder.prototype.addressSearch = jest.fn();
-});
+import { render, fireEvent } from "./helpers/test-utils";
 
 describe("concert", () => {
     it("back 버튼을 클릭하면 리스트로 돌아간다", () => {
