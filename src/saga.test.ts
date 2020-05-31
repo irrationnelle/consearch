@@ -13,7 +13,8 @@ it("fetches concerts", () => {
     const concerts = mockConcerts;
 
     const mockGetRequest = jest.spyOn(axios, "get");
-    mocked(mockGetRequest).mockResolvedValue({ data: mockConcerts });
+    mocked(mockGetRequest).mockResolvedValueOnce({ data: mockConcerts });
+
     return (
         expectSaga(mySaga)
             //.provide([[call(api, id), user]])
