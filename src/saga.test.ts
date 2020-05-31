@@ -9,7 +9,6 @@ import { mySaga } from "./sagas";
 import { mockConcerts } from "./__mock__/data";
 
 it("fetches concerts", () => {
-    const id = 1;
     const concerts = mockConcerts;
 
     const mockGetRequest = jest.spyOn(axios, "get");
@@ -19,18 +18,17 @@ it("fetches concerts", () => {
         expectSaga(mySaga)
             //.provide([[call(api, id), user]])
             .put({ type: "REQ_CONCERTS_SUCCEEDED", payload: { concerts } })
-            .dispatch({ type: "REQ_CONCERTS", payload: { id } })
+            .dispatch({ type: "REQ_CONCERTS" })
             .silentRun()
     );
 });
 
 it("handles errors", () => {
-    const id = 2;
     const error = new Error("Whoops");
 
     return expectSaga(mySaga)
-        .provide([[call(retrieveConcerts, id), throwError(error)]])
+        .provide([[call(retrieveConcerts), throwError(error)]])
         .put({ type: "REQ_CONCERTS_FAILED", message: error })
-        .dispatch({ type: "REQ_CONCERTS", payload: { id } })
+        .dispatch({ type: "REQ_CONCERTS" })
         .run();
 });
