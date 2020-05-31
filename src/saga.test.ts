@@ -2,19 +2,18 @@ import { expectSaga } from "redux-saga-test-plan";
 import { throwError } from "redux-saga-test-plan/providers";
 import { call } from "redux-saga/effects";
 import { mocked } from "ts-jest/utils";
+import axios from "axios";
 
 import { retrieveConcerts } from "./api/concert";
 import { mySaga } from "./sagas";
 import { mockConcerts } from "./__mock__/data";
 
-import axios from "axios";
-jest.mock("axios");
-
 it("fetches concerts", () => {
     const id = 1;
     const concerts = mockConcerts;
 
-    mocked(axios.get).mockResolvedValue({ data: mockConcerts });
+    const mockGetRequest = jest.spyOn(axios, "get");
+    mocked(mockGetRequest).mockResolvedValue({ data: mockConcerts });
     return (
         expectSaga(mySaga)
             //.provide([[call(api, id), user]])
