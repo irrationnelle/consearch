@@ -52,7 +52,7 @@ function ConcertLocationMap(props: Props) {
                 map.setCenter(coords);
             }
         });
-    }, [props.points, props.address]);
+    }, [props]);
 
     return <div id="map" style={{ width: "500px", height: "400px" }} />;
 }
