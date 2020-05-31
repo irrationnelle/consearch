@@ -14,10 +14,7 @@ it("fetches concerts", () => {
     const id = 1;
     const concerts = mockConcerts;
 
-    mocked(axios.get).mockImplementation(() => {
-        return Promise.resolve({ data: mockConcerts });
-    });
-
+    mocked(axios.get).mockResolvedValue({ data: mockConcerts });
     return (
         expectSaga(mySaga)
             //.provide([[call(api, id), user]])
