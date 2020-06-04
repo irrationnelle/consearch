@@ -1,10 +1,10 @@
-name: Node.js CI
+name: nodejs and gcloud CI
 
 on: [push]
 
 jobs:
   gcloud-setup:
-    name: install gcloud
+    name: setup nodejs and gcloud
     runs-on: ubuntu-latest
 
     strategy:
@@ -12,19 +12,26 @@ jobs:
          node-version: [14.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - name: checkout
+        uses: actions/checkout@v2
+      
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2-beta
         with:
           node-version: ${{ matrix.node-version }}
+      - name: install nodejs
+        run: npm install
 
-      - run: npm install
-      - run: npm test
+      - name: code test
+        run: npm test
 
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      - name: setting gcloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: '290.0.1'
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
-      - run: gcloud info
+      
+      - name: verify installation for gcloud
+        run: gcloud info
