@@ -16,7 +16,7 @@ describe("concert list", () => {
             initialState
         });
 
-        expect(container.innerHTML).toMatch("concert list2");
+        expect(container.innerHTML).toMatch("concert list");
 
         //when
         fireEvent.click(getByText(mockConcerts[0].title));
