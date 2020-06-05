@@ -21,7 +21,6 @@ function ConcertList() {
             <Route path={match.path + "/:nameOfConcert"} component={Concert} />
             <Route exact path={match.path}>
                 <div>
-                    <div>concert list</div>
                     <div>
                         {concerts.map((concert: ConcertType, index: number) => (
                             <div key={index}>
