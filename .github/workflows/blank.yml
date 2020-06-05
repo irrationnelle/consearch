@@ -43,4 +43,4 @@ jobs:
         run: gcloud components update
 
       - name: deploy to cloud run
-        run: gcloud beta run deploy consearch --image gcr.io/${{secrets.GCP_PROJECT_ID}}/cra-cloud-run --platform managed --quiet
+        run: gcloud beta run deploy consearch --image gcr.io/${{secrets.GCP_PROJECT_ID}}/cra-cloud-run --platform managed --region=asia-northeast1 --quiet
