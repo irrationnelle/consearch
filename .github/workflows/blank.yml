@@ -37,4 +37,4 @@ jobs:
         run: gcloud builds submit --tag gcr.io/${{secrets.GCP_PROJECT_ID}}/cra-cloud-run
 
       - name: deploy to cloud run
-        run: gcloud  beta run deploy --image gcr.io/${{secrets.GCP_PROJECT_ID}}/cra-cloud-run --platform managed
+        run: gcloud  beta run deploy --image gcr.io/${{secrets.GCP_PROJECT_ID}}/cra-cloud-run --platform managed --quiet
