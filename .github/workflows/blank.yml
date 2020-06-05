@@ -36,5 +36,8 @@ jobs:
       - name: build and create docker image to cloud build
         run: gcloud builds submit --tag gcr.io/${{secrets.GCP_PROJECT_ID}}/cra-cloud-run
 
+      - name: install gcloud beta component
+        run: gcloud components install beta
+
       - name: deploy to cloud run
         run: gcloud  beta run deploy --image gcr.io/${{secrets.GCP_PROJECT_ID}}/cra-cloud-run --platform managed --quiet
