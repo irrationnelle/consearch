@@ -39,5 +39,8 @@ jobs:
       - name: install gcloud beta component
         run: gcloud components install beta
 
+      - name: update gcloud component update
+        run: gcloud components update
+
       - name: deploy to cloud run
-        run: gcloud  beta run deploy --image gcr.io/${{secrets.GCP_PROJECT_ID}}/cra-cloud-run --platform managed --quiet
+        run: gcloud beta run deploy consearch --image gcr.io/${{secrets.GCP_PROJECT_ID}}/cra-cloud-run --platform managed --quiet
