@@ -17,6 +17,11 @@ function ConcertList() {
 
     return (
         <div>
+            <span>filter</span>
+            <select>
+                <option>genre</option>
+                <option>price</option>
+            </select>
             <span>concert list</span>
             <Route path={match.path + "/:nameOfConcert"} component={Concert} />
             <Route exact path={match.path}>
