@@ -24,4 +24,22 @@ describe("concert list", () => {
         //then
         expect(container.innerHTML).toMatch(mockConcerts[0].title);
     });
+
+    it("콘서트 리스트에는 가격, 밴드이름, 밴드 장르, 시간표가 나타나야 한다.", () => {
+        //given
+        const initialState: { concerts: Concert[] } = {
+            concerts: mockConcerts
+        };
+
+        //when
+        const { container, getByText } = render(<ConcertList />, {
+            initialState
+        });
+
+        //then
+        expect(container.innerHTML).toMatch(mockConcerts[0].artist.name);
+        expect(container.innerHTML).toMatch(mockConcerts[0].artist.genre);
+        expect(container.innerHTML).toMatch(mockConcerts[0].price);
+        expect(container.innerHTML).toMatch(mockConcerts[0].timetable);
+    });
 });
