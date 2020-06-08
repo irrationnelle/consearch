@@ -1,7 +1,11 @@
 export interface Concert {
     id: number;
+    artist: {
+        name: string;
+        genre: string;
+    };
     title: string;
-    artist: string;
     address: string;
-    price: number;
+    price: string;
+    timetable: string;
 }
