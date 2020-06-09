@@ -6,6 +6,6 @@ export interface Concert {
     };
     title: string;
     address: string;
-    price: string;
+    price: number;
     timetable: string;
 }
