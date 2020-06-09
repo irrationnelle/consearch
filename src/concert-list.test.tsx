@@ -39,7 +39,7 @@ describe("concert list", () => {
         //then
         expect(container.innerHTML).toMatch(mockConcerts[0].artist.name);
         expect(container.innerHTML).toMatch(mockConcerts[0].artist.genre);
-        expect(container.innerHTML).toMatch(mockConcerts[0].price);
+        expect(container.innerHTML).toMatch(mockConcerts[0].price.toString());
         expect(container.innerHTML).toMatch(mockConcerts[0].timetable);
     });
 });
