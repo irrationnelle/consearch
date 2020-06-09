@@ -41,6 +41,10 @@ function ConcertList() {
                                     {concert.title}
                                 </Link>
                                 <br />
+                                {concert.price}
+                                {concert.artist.name}
+                                {concert.artist.genre}
+                                {concert.timetable}
                             </div>
                         ))}
                     </div>
