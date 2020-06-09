@@ -1,7 +1,9 @@
 name: nodejs and gcloud CI
 
-on: [push]
-
+on:
+  push:
+    branches:
+      - master
 jobs:
   gcloud-setup:
     name: setup nodejs and gcloud
