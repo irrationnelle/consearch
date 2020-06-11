@@ -1,5 +1,5 @@
 import { Concert } from "../@models/concert";
-import { format } from 'date-fns';
+import { format } from "date-fns";
 
 const mockConcerts: Concert[] = [
     {
@@ -8,7 +8,7 @@ const mockConcerts: Concert[] = [
             name: "behemoth",
             genre: "blackmetal"
         },
-        timetable: format(new Date(2020, 5, 24), 'yyyy-MM-dd'),
+        timetable: format(new Date(2020, 5, 24), "yyyy-MM-dd"),
         title: "behemoth",
         price: 20000,
         address: "norway"
@@ -19,7 +19,7 @@ const mockConcerts: Concert[] = [
             name: "shining",
             genre: "blackmetal"
         },
-        timetable: format(new Date(2020, 9, 24), 'yyyy-MM-dd'),
+        timetable: format(new Date(2020, 9, 24), "yyyy-MM-dd"),
         title: "shining",
         price: 10000,
         address: "poland"
