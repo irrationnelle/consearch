@@ -39,7 +39,7 @@ jobs:
       
       - name: build and create docker image to cloud build
         run: gcloud builds submit . \
-                --substitutions=_REACT_APP_KAKAO_MAP_API_KEY=${{ secrets.REACT_APP_KAKAO_MAP_API_KEY }},\
+                --substitutions _REACT_APP_KAKAO_MAP_API_KEY=${{ secrets.REACT_APP_KAKAO_MAP_API_KEY }},\
                 _REACT_APP_DOMAIN_API_URL=${{ secrets.REACT_APP_DOMAIN_API_URL }} 
 
       - name: install gcloud beta component
