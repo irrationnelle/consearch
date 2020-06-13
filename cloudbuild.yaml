@@ -1,10 +1,12 @@
 steps:
-- name: 'gcr.io/$PROJECT_ID/cra-cloud-run'
+- name: 'gcr.io/cloud-builders/docker'
   args: ['build',
          '--build-arg',
          'REACT_APP_KAKAO_MAP_API_KEY=${_REACT_APP_KAKAO_MAP_API_KEY}',
          '--build-arg',
          'REACT_APP_DOMAIN_API_URL=${_REACT_APP_DOMAIN_API_URL}',
+         '-t',
+         'gcr.io/$PROJECT_ID/cra-cloud-run',
          '.']
 substitutions:
     _REACT_APP_KAKAO_MAP_API_KEY: '' # default value
