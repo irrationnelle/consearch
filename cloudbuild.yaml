@@ -5,9 +5,8 @@ steps:
          'REACT_APP_KAKAO_MAP_API_KEY=${_REACT_APP_KAKAO_MAP_API_KEY}',
          '--build-arg',
          'REACT_APP_DOMAIN_API_URL=${_REACT_APP_DOMAIN_API_URL}',
-         '-t',
-         'gcr.io/$PROJECT_ID/cra-cloud-run',
          '.']
 substitutions:
     _REACT_APP_KAKAO_MAP_API_KEY: '' # default value
     _REACT_APP_DOMAIN_API_URL: '' # default value
+images: ['gcr.io/$PROJECT_ID/cra-cloud-run']
