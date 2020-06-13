@@ -26,6 +26,8 @@ jobs:
 
       - name: code test
         run: npm test
+        env:
+          REACT_APP_DOMAIN_API_URL: ${{ secrets.REACT_APP_DOMAIN_API_URL }}
 
       - name: setting gcloud
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
