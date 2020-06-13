@@ -38,7 +38,9 @@ jobs:
           export_default_credentials: true
       
       - name: build and create docker image to cloud build
-        run: gcloud builds submit --tag gcr.io/${{secrets.GCP_PROJECT_ID}}/cra-cloud-run
+        run: gcloud builds submit --config=cloudbuild.yaml \
+                --substitutions=_REACT_APP_KAKAO_MAP_API_KEY=${{ secrets.REACT_APP_KAKAO_MAP_API_KEY }},\
+                _REACT_APP_DOMAIN_API_URL=${{ secrets.REACT_APP_DOMAIN_API_URL }} .
 
       - name: install gcloud beta component
         run: gcloud components install beta
