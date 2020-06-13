@@ -8,6 +8,4 @@ steps:
          '-t',
          'gcr.io/$PROJECT_ID/cra-cloud-run',
          '.']
-
-  images: 
-    - 'gcr.io/$PROJECT_ID/cra-cloud-run'
+images: ['gcr.io/$PROJECT_ID/cra-cloud-run']
