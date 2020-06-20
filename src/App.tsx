@@ -5,6 +5,7 @@ import ConcertList from "./concert-list";
 import "./App.css";
 
 function App() {
+    console.log('%chello consearch!', 'background: white; color: green;');
     return (
         <Router>
             <div>
