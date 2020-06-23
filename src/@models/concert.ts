@@ -3,7 +3,7 @@ export interface Concert {
     artist: {
         name: string;
         genre: string;
-    };
+    }[];
     title: string;
     address: string;
     price: number;
