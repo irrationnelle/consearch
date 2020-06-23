@@ -37,8 +37,8 @@ describe("concert list", () => {
         });
 
         //then
-        expect(container.innerHTML).toMatch(mockConcerts[0].artist.name);
-        expect(container.innerHTML).toMatch(mockConcerts[0].artist.genre);
+        expect(container.innerHTML).toMatch(mockConcerts[0].artist[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[0].artist[0].genre);
         expect(container.innerHTML).toMatch(mockConcerts[0].price.toString());
         expect(container.innerHTML).toMatch(mockConcerts[0].timetable);
     });
