@@ -3,13 +3,13 @@ import ConcertList from "./concert-list";
 import { render, fireEvent } from "./helpers/test-utils";
 
 import { mockConcerts } from "./__mock__/data";
-import { Concert } from "./@models/concert";
+import { RawConcert } from "./@models/concert";
 import {format, parseISO} from "date-fns";
 
 describe("concert list", () => {
     it("콘서트 리스트에서 콘서트를 클릭하면 콘서트로 이동한다.", () => {
         //given
-        const initialState: { concerts: Concert[] } = {
+        const initialState: { concerts: RawConcert[] } = {
             concerts: mockConcerts
         };
 
@@ -28,7 +28,7 @@ describe("concert list", () => {
 
     it("콘서트 리스트에는 가격, 밴드이름, 밴드 장르, 시간표가 나타나야 한다.", () => {
         //given
-        const initialState: { concerts: Concert[] } = {
+        const initialState: { concerts: RawConcert[] } = {
             concerts: mockConcerts
         };
 

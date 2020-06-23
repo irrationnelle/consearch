@@ -1,14 +1,14 @@
-import { Concert } from "./@models/concert";
+import { RawConcert } from "./@models/concert";
 
 const initialState: {
-    concerts: Concert[];
+    concerts: RawConcert[];
 } = {
     concerts: []
 };
 
 function concert(
     state = initialState,
-    action: { type: string; payload: { concerts: Concert[] } }
+    action: { type: string; payload: { concerts: RawConcert[] } }
 ) {
     switch (action.type) {
         case "REQ_CONCERTS_SUCCEEDED":

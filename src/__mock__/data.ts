@@ -1,7 +1,6 @@
-import { Concert } from "../@models/concert";
-import { format } from "date-fns";
+import { RawConcert } from "../@models/concert";
 
-const mockConcerts: Concert[] = [
+const mockConcerts: RawConcert[] = [
     {
         id: 1,
         artist: [{

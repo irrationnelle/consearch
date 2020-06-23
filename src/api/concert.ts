@@ -1,10 +1,11 @@
 import axios from "axios";
-import {Concert} from "../@models/concert";
+
+import {RawConcert} from "../@models/concert";
 import {mockConcerts} from "../__mock__/data";
 
 const { REACT_APP_DOMAIN_API_URL } = process.env;
 
-const retrieveConcerts = async (): Promise<Concert[]> => {
+const retrieveConcerts = async (): Promise<RawConcert[]> => {
     if (process.env.REACT_APP_DEV) {
         return mockConcerts;
     }
@@ -12,7 +13,7 @@ const retrieveConcerts = async (): Promise<Concert[]> => {
     return data;
 };
 
-const retrieveConcert = async (id: number): Promise<Concert> => {
+const retrieveConcert = async (id: number): Promise<RawConcert> => {
     if (process.env.REACT_APP_DEV) {
         return mockConcerts[0];
     }

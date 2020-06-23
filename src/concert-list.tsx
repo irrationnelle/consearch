@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Link, useRouteMatch } from "react-router-dom";
 
 import Concert from "./concert";
 import { concertsSelector } from "./selectors";
-import { Concert as ConcertType } from "./@models/concert";
+import {Concert as ConcertType} from "./@models/concert";
 
 function ConcertList() {
     const dispatch = useDispatch();
@@ -44,7 +44,8 @@ function ConcertList() {
                                 {concert.price}
                                 {concert?.artist[0]?.name}
                                 {concert?.artist[0]?.genre}
-                                {concert.timetable}
+                                {concert.time}
+                                {concert.date}
                             </div>
                         ))}
                     </div>
