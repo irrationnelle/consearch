@@ -4,6 +4,7 @@ import { render, fireEvent } from "./helpers/test-utils";
 
 import { mockConcerts } from "./__mock__/data";
 import { Concert } from "./@models/concert";
+import {format, parseISO} from "date-fns";
 
 describe("concert list", () => {
     it("콘서트 리스트에서 콘서트를 클릭하면 콘서트로 이동한다.", () => {
@@ -40,6 +41,13 @@ describe("concert list", () => {
         expect(container.innerHTML).toMatch(mockConcerts[0].artist[0].name);
         expect(container.innerHTML).toMatch(mockConcerts[0].artist[0].genre);
         expect(container.innerHTML).toMatch(mockConcerts[0].price.toString());
-        expect(container.innerHTML).toMatch(mockConcerts[0].timetable);
+
+        const rawTimetable = mockConcerts[0].timetable;
+        const parsedTimetable = parseISO(rawTimetable);
+        const expectedTime: string = format(parsedTimetable, "HH:mma");
+        const expectedDate: string = format(parsedTimetable, "yyyy-MM-dd");
+
+        expect(container.innerHTML).toMatch(expectedTime);
+        expect(container.innerHTML).toMatch(expectedDate);
     });
 });
