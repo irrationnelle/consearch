@@ -8,7 +8,7 @@ const mockConcerts: Concert[] = [
             name: "behemoth",
             genre: "blackmetal"
         }],
-        timetable: format(new Date(2020, 5, 24), "yyyy-MM-dd"),
+        timetable: "2020-06-21T21:30:00+09:00",
         title: "behemoth",
         price: 20000,
         address: "norway"
@@ -19,7 +19,7 @@ const mockConcerts: Concert[] = [
             name: "shining",
             genre: "blackmetal"
         }],
-        timetable: format(new Date(2020, 9, 24), "yyyy-MM-dd"),
+        timetable: "2020-06-23T23:30:00+09:00",
         title: "shining",
         price: 10000,
         address: "poland"
