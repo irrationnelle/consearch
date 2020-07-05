@@ -33,13 +33,13 @@ describe("concert list", () => {
         };
 
         //when
-        const { container, getByText } = render(<ConcertList />, {
+        const { container } = render(<ConcertList />, {
             initialState
         });
 
         //then
-        expect(container.innerHTML).toMatch(mockConcerts[0].artist[0].name);
-        expect(container.innerHTML).toMatch(mockConcerts[0].artist[0].genre);
+        expect(container.innerHTML).toMatch(mockConcerts[0].artists[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[0].artists[0].genre);
         expect(container.innerHTML).toMatch(mockConcerts[0].price.toString());
 
         const rawTimetable = mockConcerts[0].timetable;

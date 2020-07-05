@@ -1,6 +1,6 @@
 interface ConcertWithoutTime {
     id: number;
-    artist: {
+    artists: {
         name: string;
         genre: string;
     }[];
