@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Link, useRouteMatch } from "react-router-dom";
 
@@ -11,6 +11,8 @@ function ConcertList() {
     const match = useRouteMatch();
     const concerts = useSelector(concertsSelector);
 
+    const [genre, setGenre] = useState<string | null>(null)
+
     useEffect(() => {
         dispatch({ type: "REQ_CONCERTS", payload: { id: 1 } });
     }, [dispatch]);
@@ -22,12 +24,22 @@ function ConcertList() {
                 <option>genre</option>
                 <option>price</option>
             </select>
+            <input
+                aria-label="concert-genre"
+                value={genre || ''}
+                onChange={(event) => {
+                    event.preventDefault();
+                    setGenre(event.currentTarget.value);
+                }}
+            />
             <span>concert list</span>
             <Route path={match.path + "/:nameOfConcert"} component={Concert} />
             <Route exact path={match.path}>
                 <div>
                     <div>
-                        {concerts.map((concert: ConcertType, index: number) => (
+                        {concerts.filter((concert: ConcertType) =>
+                            !genre || concert.artists.filter(artist => artist.genre === genre).length > 0
+                        ).map((concert: ConcertType, index: number) => (
                             <div key={index}>
                                 <Link
                                     to={{
