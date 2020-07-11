@@ -64,7 +64,7 @@ describe("concert list", () => {
 
 
         // when
-        fireEvent.change(input, { target: { value: "BlackMetal"}})
+        fireEvent.change(input, { target: { value: "Metalcore"}})
 
         //then
         expect(container.innerHTML).not.toMatch(mockConcerts[0].artists[0].name);
