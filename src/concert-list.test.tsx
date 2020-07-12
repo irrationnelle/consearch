@@ -78,7 +78,7 @@ describe("concert list", () => {
         const initialState: { concerts: RawConcert[] } = {
             concerts: mockConcerts
         };
-        const { container, getByLabelText } = render(<ConcertList />, {
+        const { container, getByText ,getByLabelText } = render(<ConcertList />, {
             initialState
         });
 
@@ -87,7 +87,9 @@ describe("concert list", () => {
 
         // when
         fireEvent.change(input, { target: { value: "Metalcore"}})
+        fireEvent.click(getByText(/add genre/));
         fireEvent.change(input, { target: { value: "PostMetal"}})
+        fireEvent.click(getByText(/add genre/));
 
         //then
         expect(container.innerHTML).not.toMatch(mockConcerts[0].artists[0].name);
