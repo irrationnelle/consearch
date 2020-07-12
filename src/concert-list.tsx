@@ -12,6 +12,7 @@ function ConcertList() {
     const concerts = useSelector(concertsSelector);
 
     const [genre, setGenre] = useState<string | null>(null)
+    const [genres, setGenres] = useState<string[]>([])
 
     useEffect(() => {
         dispatch({ type: "REQ_CONCERTS", payload: { id: 1 } });
@@ -30,6 +31,7 @@ function ConcertList() {
                 onChange={(event) => {
                     event.preventDefault();
                     setGenre(event.currentTarget.value);
+                    setGenres([...genres, event.currentTarget.value]);
                 }}
             />
             <span>concert list</span>
@@ -38,7 +40,8 @@ function ConcertList() {
                 <div>
                     <div>
                         {concerts.filter((concert: ConcertType) =>
-                            !genre || concert.artists.filter(artist => artist.genre === genre).length > 0
+                             genres.length === 0 ||
+                                concert.artists.filter(artist => genres.includes(artist.genre)).length > 0
                         ).map((concert: ConcertType, index: number) => (
                             <div key={index}>
                                 <Link
