@@ -11,7 +11,6 @@ function ConcertList() {
     const match = useRouteMatch();
     const concerts = useSelector(concertsSelector);
 
-    const [genre, setGenre] = useState<string | null>(null)
     const [genres, setGenres] = useState<string[]>([])
 
     useEffect(() => {
@@ -27,10 +26,8 @@ function ConcertList() {
             </select>
             <input
                 aria-label="concert-genre"
-                value={genre || ''}
                 onChange={(event) => {
                     event.preventDefault();
-                    setGenre(event.currentTarget.value);
                     setGenres([...genres, event.currentTarget.value]);
                 }}
             />
