@@ -44,6 +44,17 @@ const mockConcerts: RawConcert[] = [
         title: "Killswitch engage",
         price: 20000,
         address: "Kensington Gore, South Kensington, London"
+    },
+    {
+        id: 5,
+        artists: [{
+            name: "Amenra",
+            genre: "PostMetal"
+        }],
+        timetable: "2020-07-13T20:00:00+09:00",
+        title: "Amenra",
+        price: 10000,
+        address: "서울특별시 마포구 서교동 홍익로 25"
     }
 ];
 

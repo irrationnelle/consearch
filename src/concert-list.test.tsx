@@ -72,4 +72,28 @@ describe("concert list", () => {
         expect(container.innerHTML).toMatch(mockConcerts[2].artists[0].name);
         expect(container.innerHTML).toMatch(mockConcerts[3].artists[0].name);
     })
+
+    it("콘서트 목록에 2개 이상의 옵션을 추가해서 조건에 맞는 콘서트 목록만을 남긴다", () => {
+        //given
+        const initialState: { concerts: RawConcert[] } = {
+            concerts: mockConcerts
+        };
+        const { container, getByLabelText } = render(<ConcertList />, {
+            initialState
+        });
+
+        const input = getByLabelText("concert-genre");
+
+
+        // when
+        fireEvent.change(input, { target: { value: "Metalcore"}})
+        fireEvent.change(input, { target: { value: "PostMetal"}})
+
+        //then
+        expect(container.innerHTML).not.toMatch(mockConcerts[0].artists[0].name);
+        expect(container.innerHTML).not.toMatch(mockConcerts[1].artists[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[2].artists[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[3].artists[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[4].artists[0].name);
+    })
 });
