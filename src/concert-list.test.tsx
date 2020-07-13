@@ -51,7 +51,7 @@ describe("concert list", () => {
         expect(container.innerHTML).toMatch(expectedDate);
     });
 
-    it("콘서트 리스트에 옵션을 추가해서 조건에 맞는 콘서트 목록만을 남긴다", () => {
+    it("콘서트 목록에 옵션을 입력만 하면 어떤 콘서트 목록도 나타나지 않는다.", () => {
         //given
         const initialState: { concerts: RawConcert[] } = {
             concerts: mockConcerts
@@ -60,42 +60,64 @@ describe("concert list", () => {
             initialState
         });
 
-        const input = getByLabelText("concert-genre");
-
-
         // when
+        const input = getByLabelText("concert-genre");
         fireEvent.change(input, { target: { value: "Metalcore"}})
 
         //then
         expect(container.innerHTML).not.toMatch(mockConcerts[0].artists[0].name);
         expect(container.innerHTML).not.toMatch(mockConcerts[1].artists[0].name);
-        expect(container.innerHTML).toMatch(mockConcerts[2].artists[0].name);
-        expect(container.innerHTML).toMatch(mockConcerts[3].artists[0].name);
+        expect(container.innerHTML).not.toMatch(mockConcerts[2].artists[0].name);
+        expect(container.innerHTML).not.toMatch(mockConcerts[3].artists[0].name);
+        expect(container.innerHTML).not.toMatch(mockConcerts[4].artists[0].name);
     })
 
-    it("콘서트 목록에 2개 이상의 옵션을 추가해서 조건에 맞는 콘서트 목록만을 남긴다", () => {
+    it("콘서트 목록에 옵션을 입력한 뒤 추가 버튼을 누르면 옵션에 해당하는 콘서트 목록이 나타난다.", () => {
         //given
         const initialState: { concerts: RawConcert[] } = {
             concerts: mockConcerts
         };
-        const { container, getByText ,getByLabelText } = render(<ConcertList />, {
+        const { container, getByText, getByLabelText } = render(<ConcertList />, {
             initialState
         });
 
-        const input = getByLabelText("concert-genre");
-
-
         // when
+        const input = getByLabelText("concert-genre");
         fireEvent.change(input, { target: { value: "Metalcore"}})
-        fireEvent.click(getByText(/add genre/));
-        fireEvent.change(input, { target: { value: "PostMetal"}})
-        fireEvent.click(getByText(/add genre/));
+        fireEvent.click(getByText(/add genre/i));
 
         //then
         expect(container.innerHTML).not.toMatch(mockConcerts[0].artists[0].name);
         expect(container.innerHTML).not.toMatch(mockConcerts[1].artists[0].name);
         expect(container.innerHTML).toMatch(mockConcerts[2].artists[0].name);
         expect(container.innerHTML).toMatch(mockConcerts[3].artists[0].name);
-        expect(container.innerHTML).toMatch(mockConcerts[4].artists[0].name);
+        expect(container.innerHTML).not.toMatch(mockConcerts[4].artists[0].name);
+    })
+
+    it("콘서트 목록에 같은 종류의 옵션을 2개 이상 입력한 뒤 각각 추가 버튼을 누르면 둘 중 한가지라도 해당하는 콘서트 목록이 나타난다.", () => {
+        //given
+        const initialState: { concerts: RawConcert[] } = {
+            concerts: mockConcerts
+        };
+        const { container, getByText, getByLabelText } = render(<ConcertList />, {
+            initialState
+        });
+
+        // when
+        const input = getByLabelText("concert-genre");
+        const clickAddButton = () => fireEvent.click(getByText(/add genre/i));
+        const inputGenre = (genre: string) => fireEvent.change(input, { target: { value: genre}})
+
+        inputGenre("Metalcore");
+        clickAddButton();
+        inputGenre("PostMetal");
+        clickAddButton();
+
+        //then
+        expect(container.innerHTML).not.toMatch(mockConcerts[0].artists[0].name);
+        expect(container.innerHTML).not.toMatch(mockConcerts[1].artists[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[2].artists[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[3].artists[0].name);
+        expect(container.innerHTML).not.toMatch(mockConcerts[4].artists[0].name);
     })
 });
