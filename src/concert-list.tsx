@@ -12,6 +12,7 @@ function ConcertList() {
     const concerts = useSelector(concertsSelector);
 
     const [genres, setGenres] = useState<string[]>([])
+    const [genre, setGenre] = useState<string | null>(null)
 
     useEffect(() => {
         dispatch({ type: "REQ_CONCERTS", payload: { id: 1 } });
@@ -24,13 +25,23 @@ function ConcertList() {
                 <option>genre</option>
                 <option>price</option>
             </select>
-            <input
-                aria-label="concert-genre"
-                onChange={(event) => {
-                    event.preventDefault();
-                    setGenres([...genres, event.currentTarget.value]);
-                }}
-            />
+            <form onSubmit={() => {
+                if(!!genre) {
+                    setGenres([...genres, genre]);
+                    setGenre(null);
+                }
+            }}
+                  data-testid="form-add-genre"
+            >
+                <input
+                    aria-label="concert-genre"
+                    onChange={(event) => {
+                        event.preventDefault();
+                        setGenre(event.currentTarget.value);
+                    }}
+                />
+                <input type="submit" value="Add Genre" />
+            </form>
             <span>concert list</span>
             <Route path={match.path + "/:nameOfConcert"} component={Concert} />
             <Route exact path={match.path}>
