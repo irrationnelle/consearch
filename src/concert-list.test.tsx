@@ -65,11 +65,11 @@ describe("concert list", () => {
         fireEvent.change(input, { target: { value: "Metalcore"}})
 
         //then
-        expect(container.innerHTML).not.toMatch(mockConcerts[0].artists[0].name);
-        expect(container.innerHTML).not.toMatch(mockConcerts[1].artists[0].name);
-        expect(container.innerHTML).not.toMatch(mockConcerts[2].artists[0].name);
-        expect(container.innerHTML).not.toMatch(mockConcerts[3].artists[0].name);
-        expect(container.innerHTML).not.toMatch(mockConcerts[4].artists[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[0].artists[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[1].artists[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[2].artists[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[3].artists[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[4].artists[0].name);
     })
 
     it("콘서트 목록에 옵션을 입력한 뒤 추가 버튼을 누르면 옵션에 해당하는 콘서트 목록이 나타난다.", () => {
@@ -77,14 +77,14 @@ describe("concert list", () => {
         const initialState: { concerts: RawConcert[] } = {
             concerts: mockConcerts
         };
-        const { container, getByText, getByLabelText } = render(<ConcertList />, {
+        const { container, getByTestId, getByLabelText } = render(<ConcertList />, {
             initialState
         });
 
         // when
         const input = getByLabelText("concert-genre");
         fireEvent.change(input, { target: { value: "Metalcore"}})
-        fireEvent.click(getByText(/add genre/i));
+        fireEvent.submit(getByTestId("form-add-genre"))
 
         //then
         expect(container.innerHTML).not.toMatch(mockConcerts[0].artists[0].name);
@@ -99,14 +99,14 @@ describe("concert list", () => {
         const initialState: { concerts: RawConcert[] } = {
             concerts: mockConcerts
         };
-        const { container, getByText, getByLabelText } = render(<ConcertList />, {
+        const { container, getByTestId, getByLabelText } = render(<ConcertList />, {
             initialState
         });
 
         // when
         const input = getByLabelText("concert-genre");
-        const clickAddButton = () => fireEvent.click(getByText(/add genre/i));
         const inputGenre = (genre: string) => fireEvent.change(input, { target: { value: genre}})
+        const clickAddButton = () => fireEvent.submit(getByTestId("form-add-genre"));
 
         inputGenre("Metalcore");
         clickAddButton();
@@ -118,6 +118,6 @@ describe("concert list", () => {
         expect(container.innerHTML).not.toMatch(mockConcerts[1].artists[0].name);
         expect(container.innerHTML).toMatch(mockConcerts[2].artists[0].name);
         expect(container.innerHTML).toMatch(mockConcerts[3].artists[0].name);
-        expect(container.innerHTML).not.toMatch(mockConcerts[4].artists[0].name);
+        expect(container.innerHTML).toMatch(mockConcerts[4].artists[0].name);
     })
 });
