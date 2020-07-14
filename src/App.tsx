@@ -6,7 +6,7 @@ import {
 import ConcertList from './concert-list';
 import './App.css';
 
-const App: React.FC = ():ReactElement => (
+const App: React.FC = (): ReactElement => (
   <Router>
     <div>
       <ul>

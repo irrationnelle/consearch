@@ -1,4 +1,4 @@
-import React, {ReactElement, useEffect} from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 // eslint-disable-next-line import/no-unresolved
 import { CustomWindow } from './@types/custom.window';
@@ -55,6 +55,6 @@ const ConcertLocationMap: React.FC<Props> = (props: Props): ReactElement => {
   }, [props]);
 
   return <div id="map" style={{ width: '500px', height: '400px' }} />;
-}
+};
 
 export default ConcertLocationMap;
