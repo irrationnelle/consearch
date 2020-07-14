@@ -50,8 +50,8 @@ function ConcertList() {
                         {concerts.filter((concert: ConcertType) =>
                              genres.length === 0 ||
                                 concert.artists.filter(artist => genres.includes(artist.genre)).length > 0
-                        ).map((concert: ConcertType, index: number) => (
-                            <div key={index}>
+                        ).map((concert: ConcertType) => (
+                            <div key={concert.id}>
                                 <Link
                                     to={{
                                         pathname: `${match.url}/${concert.id}`,
