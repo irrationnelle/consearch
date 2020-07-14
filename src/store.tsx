@@ -1,8 +1,9 @@
-import { createStore, applyMiddleware } from "redux";
-import createSagaMiddleware from "redux-saga";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-import { concert } from "./reducers";
-import { mySaga } from "./sagas";
+import { concert } from './reducers';
+import { mySaga } from './sagas';
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
