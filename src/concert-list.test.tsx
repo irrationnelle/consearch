@@ -146,4 +146,30 @@ describe('concert list', () => {
     expect(container.innerHTML).not.toMatch(mockConcerts[3].artists[0].name);
     expect(container.innerHTML).not.toMatch(mockConcerts[4].artists[0].name);
   });
+
+  it('콘서트 목록에 장르와 시간 날짜, 가격 등의 옵션을 조합하면 거기에 해당하는 결과가 나온다.', () => {
+    // given
+    const initialState: { concerts: RawConcert[] } = {
+      concerts: mockConcerts,
+    };
+    const { container, getByTestId, getByLabelText } = render(<ConcertList />, {
+      initialState,
+    });
+
+    // when
+    const input = getByLabelText('concert-genre');
+    const inputGenre = (genre: string) => fireEvent.change(input, { target: { value: genre } });
+    const clickAddButton = () => fireEvent.submit(getByTestId('form-add-genre'));
+
+    inputGenre('ProgressiveMetal');
+    clickAddButton();
+    inputGenre('PostMetal');
+
+    // then
+    expect(container.innerHTML).not.toMatch(mockConcerts[0].artists[0].name);
+    expect(container.innerHTML).not.toMatch(mockConcerts[1].artists[0].name);
+    expect(container.innerHTML).not.toMatch(mockConcerts[2].artists[0].name);
+    expect(container.innerHTML).not.toMatch(mockConcerts[3].artists[0].name);
+    expect(container.innerHTML).not.toMatch(mockConcerts[4].artists[0].name);
+  });
 });
