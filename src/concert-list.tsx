@@ -2,6 +2,7 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Link, useRouteMatch } from 'react-router-dom';
 
+import { format } from 'date-fns';
 import Concert from './concert';
 import { concertsSelector } from './selectors';
 import { Concert as ConcertType } from './@models/concert';
@@ -13,6 +14,7 @@ const ConcertList: React.FC = (): ReactElement => {
 
   const [genres, setGenres] = useState<string[]>([]);
   const [genre, setGenre] = useState<string | null>(null);
+  const [date, setDate] = useState<string | null>(null);
 
   useEffect(() => {
     dispatch({ type: 'REQ_CONCERTS', payload: { id: 1 } });
@@ -41,6 +43,13 @@ const ConcertList: React.FC = (): ReactElement => {
             setGenre(event.currentTarget.value);
           }}
         />
+        <input
+          aria-label="concert-date"
+          onChange={(event) => {
+            event.preventDefault();
+            setDate(event.currentTarget.value);
+          }}
+        />
         <input type="submit" value="Add Genre" />
       </form>
       <span>concert list</span>
@@ -50,6 +59,7 @@ const ConcertList: React.FC = (): ReactElement => {
           <div>
             {concerts.filter((concert: ConcertType) => genres.length === 0
                 || concert.artists.filter((artist) => genres.includes(artist.genre)).length > 0)
+              .filter((concert) => (date ? concert.date === date : true))
               .map((concert: ConcertType) => (
                 <div key={concert.id}>
                   <Link

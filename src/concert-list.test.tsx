@@ -158,17 +158,18 @@ describe('concert list', () => {
 
     // when
     const input = getByLabelText('concert-genre');
+    const inputSchedule = getByLabelText('concert-date');
     const inputGenre = (genre: string) => fireEvent.change(input, { target: { value: genre } });
     const clickAddButton = () => fireEvent.submit(getByTestId('form-add-genre'));
 
-    inputGenre('ProgressiveMetal');
+    inputGenre('Metalcore');
+    fireEvent.change(inputSchedule, { target: { value: '2020-07-10' } });
     clickAddButton();
-    inputGenre('PostMetal');
 
     // then
     expect(container.innerHTML).not.toMatch(mockConcerts[0].artists[0].name);
     expect(container.innerHTML).not.toMatch(mockConcerts[1].artists[0].name);
-    expect(container.innerHTML).not.toMatch(mockConcerts[2].artists[0].name);
+    expect(container.innerHTML).toMatch(mockConcerts[2].artists[0].name);
     expect(container.innerHTML).not.toMatch(mockConcerts[3].artists[0].name);
     expect(container.innerHTML).not.toMatch(mockConcerts[4].artists[0].name);
   });
