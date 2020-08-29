@@ -4,9 +4,9 @@ import { call } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
 
-import { mockConcerts } from './__mock__/data';
-import { retrieveConcerts } from './api/concert';
-import { mySaga } from './sagas';
+import { mockConcerts } from '../__mock__/data';
+import { retrieveConcerts } from '../api/concert';
+import { mySaga } from '../sagas';
 
 const { REACT_APP_DOMAIN_API_URL } = process.env;
 

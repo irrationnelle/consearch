@@ -5,7 +5,7 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import '@testing-library/jest-dom/extend-expect';
 
-import App from './App';
+import App from '../App';
 
 test('full app rendering/navigating', () => {
   const history = createMemoryHistory();

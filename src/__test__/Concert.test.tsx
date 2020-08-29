@@ -1,9 +1,9 @@
 import React from 'react';
-import ConcertList from './concert-list';
-import { render, fireEvent } from './helpers/test-utils';
+import ConcertList from '../ConcertList';
+import { render, fireEvent } from '../helpers/test-utils';
 
-import { RawConcert } from './@models/concert';
-import { mockConcerts } from './__mock__/data';
+import { RawConcert } from '../@models/concert';
+import { mockConcerts } from '../__mock__/data';
 
 describe('concert', () => {
   it('back 버튼을 클릭하면 리스트로 돌아간다', () => {

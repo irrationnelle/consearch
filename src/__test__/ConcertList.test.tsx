@@ -1,10 +1,10 @@
 import React from 'react';
 import { format, parseISO } from 'date-fns';
-import ConcertList from './concert-list';
-import { render, fireEvent } from './helpers/test-utils';
+import ConcertList from '../ConcertList';
+import { render, fireEvent } from '../helpers/test-utils';
 
-import { mockConcerts } from './__mock__/data';
-import { RawConcert } from './@models/concert';
+import { mockConcerts } from '../__mock__/data';
+import { RawConcert } from '../@models/concert';
 
 describe('concert list', () => {
   it('콘서트 리스트에서 콘서트를 클릭하면 콘서트로 이동한다.', () => {

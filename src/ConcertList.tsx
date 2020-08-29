@@ -2,8 +2,7 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Link, useRouteMatch } from 'react-router-dom';
 
-import { format } from 'date-fns';
-import Concert from './concert';
+import Concert from './Concert';
 import { concertsSelector } from './selectors';
 import { Concert as ConcertType } from './@models/concert';
 

@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router, Switch, Route, Link,
 } from 'react-router-dom';
 
-import ConcertList from './concert-list';
+import ConcertList from './ConcertList';
 import './App.css';
 
 const App: React.FC = (): ReactElement => (
