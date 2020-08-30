@@ -3,9 +3,10 @@ import { render } from '@testing-library/react';
 
 import ConcertLocationMap from '../ConcertLocationMap';
 
+// TODO: this test is not valid.
 test('renders concert list component', () => {
-  const component = render(
-    <ConcertLocationMap points={{ x: 1, y: 2 }} address="test" />,
+  const { container } = render(
+    <ConcertLocationMap address="test" />,
   );
-  expect(component).not.toBeNull();
+  expect(container.innerHTML).not.toBeNull();
 });
