@@ -16,6 +16,7 @@ const ConcertLocationMap: React.FC<Props> = ({ address }: Props): ReactElement =
     const container = document.getElementById('map'); // 지도를 담을 영역의 DOM 레퍼런스
     const options = {
       // 지도를 생성할 때 필요한 기본 옵션
+      center: new kakao.maps.LatLng(37.54839846253257, 126.92007036208365), // 지도의 중심좌표.
       level: 3, // 지도의 레벨(확대, 축소 정도)
     };
 
@@ -37,7 +38,7 @@ const ConcertLocationMap: React.FC<Props> = ({ address }: Props): ReactElement =
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         const infowindow = new kakao.maps.InfoWindow({
-          content: '<div style="width:150px;text-align:center;padding:6px 0;">공연장</div>',
+          content: '<div data-testid="kakaoMap" style="width:150px;text-align:center;padding:6px 0;">공연장</div>',
         });
         infowindow.open(map, marker);
 
