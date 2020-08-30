@@ -67,6 +67,7 @@ const ConcertList: React.FC = (): ReactElement => {
                       state: {
                         title: concert.title,
                         price: concert.price,
+                          address: concert.address
                       },
                     }}
                   >

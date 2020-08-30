@@ -6,23 +6,16 @@ import { CustomWindow } from './@types/custom.window';
 declare let window: CustomWindow;
 
 interface Props {
-    points: {
-        x: number;
-        y: number;
-    };
     address: string;
 }
 
-const ConcertLocationMap: React.FC<Props> = (props: Props): ReactElement => {
+const ConcertLocationMap: React.FC<Props> = ({ address }: Props): ReactElement => {
   useEffect(() => {
-    const { points, address } = props;
-
     const { kakao } = window;
 
     const container = document.getElementById('map'); // 지도를 담을 영역의 DOM 레퍼런스
     const options = {
       // 지도를 생성할 때 필요한 기본 옵션
-      center: new kakao.maps.LatLng(points.x, points.y), // 지도의 중심좌표.
       level: 3, // 지도의 레벨(확대, 축소 정도)
     };
 
@@ -52,7 +45,7 @@ const ConcertLocationMap: React.FC<Props> = (props: Props): ReactElement => {
         map.setCenter(coords);
       }
     });
-  }, [props]);
+  }, [address]);
 
   return <div id="map" style={{ width: '500px', height: '400px' }} />;
 };
