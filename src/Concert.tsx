@@ -1,10 +1,9 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { History, Location } from 'history';
 
 import ConcertLocationMap from './ConcertLocationMap';
-
 
 const Concert: React.FC = (): ReactElement => {
   const history: History = useHistory();
@@ -12,7 +11,6 @@ const Concert: React.FC = (): ReactElement => {
   const {
     state: { title, price, address },
   }: Location<{ title: string; price: number; address: string; }> = useLocation();
-
 
   const goBack = () => {
     history.goBack();

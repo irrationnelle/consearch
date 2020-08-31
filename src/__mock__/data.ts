@@ -32,7 +32,7 @@ const mockConcerts: RawConcert[] = [
     timetable: '2020-07-10T20:00:00+09:00',
     title: 'Lamb of god',
     price: 30000,
-    address: 'Conne Island, Koburger Str. 3, 04277 Leipzig',
+    address: '서울 광진구 구천면로 20',
   },
   {
     id: 4,
@@ -43,7 +43,7 @@ const mockConcerts: RawConcert[] = [
     timetable: '2020-07-17T20:00:00+09:00',
     title: 'Killswitch engage',
     price: 20000,
-    address: 'Kensington Gore, South Kensington, London',
+    address: '서울 마포구 와우산로 63',
   },
   {
     id: 5,
