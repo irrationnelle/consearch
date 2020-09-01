@@ -14,18 +14,11 @@ const App: React.FC = (): ReactElement => (
           <Link to="/">Main</Link>
         </li>
         <li>
-          <Link to="/me">MyPage</Link>
-        </li>
-        <li>
           <Link to="/concerts">Concerts</Link>
         </li>
       </ul>
 
       <Switch>
-        <Route path="/me">
-          {/* eslint-disable-next-line react/no-unescaped-entities */}
-          <div>I'm rase</div>
-        </Route>
         <Route path="/concerts">
           <ConcertList />
         </Route>

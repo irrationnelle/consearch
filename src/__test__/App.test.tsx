@@ -9,7 +9,7 @@ import App from '../App';
 
 test('full app rendering/navigating', () => {
   const history = createMemoryHistory();
-  const { container, getByText } = render(
+  const { container } = render(
     <Router history={history}>
       <App />
     </Router>,
@@ -17,9 +17,4 @@ test('full app rendering/navigating', () => {
     // verify page content for expected route
     // often you'd use a data-testid or role query, but this is also possible
   expect(container.innerHTML).toMatch('main');
-
-  fireEvent.click(getByText(/MyPage/i));
-
-  // check that the content changed to the new page
-  expect(container.innerHTML).toMatch("I'm rase");
 });
