@@ -17,14 +17,20 @@ const ConcertList: React.FC = (): ReactElement => {
   const [genre, setGenre] = useState<string | null>(null);
   const [date, setDate] = useState<string | null>(null);
 
+  const concertsWithGenreAndDate = useMemo(() => {
+    const hasAllGenres = genres.length === 0;
+    const hasSelectGenre = (concert: ConcertType) => concert.artists.filter(
+      (artist) => genres.includes(artist.genre),
+    ).length > 0;
+    const byGenre = (concert: ConcertType) => hasAllGenres || hasSelectGenre(concert);
+    const byDate = (concert: ConcertType) => (date ? concert.date === date : true);
+    return concerts.filter(byGenre).filter(byDate);
+  },
+  [concerts, genres, date]);
+
   useEffect(() => {
     dispatch({ type: 'REQ_CONCERTS', payload: { id: 1 } });
   }, [dispatch]);
-
-  // eslint-disable-next-line max-len
-  const concertsWithGenre = useMemo(() => concerts.filter((concert: ConcertType) => genres.length === 0
-          || concert.artists.filter((artist) => genres.includes(artist.genre)).length > 0)
-    .filter((concert) => (date ? concert.date === date : true)), [concerts, genres, date]);
 
   return (
     <div>
@@ -63,7 +69,7 @@ const ConcertList: React.FC = (): ReactElement => {
       <Route exact path={match.path}>
         <div>
           <div>
-            {concertsWithGenre.map((concert: ConcertType) => (
+            {concertsWithGenreAndDate.map((concert: ConcertType) => (
               <div key={concert.id}>
                 <Link
                   to={{
