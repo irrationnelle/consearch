@@ -40,7 +40,8 @@ const ConcertList: React.FC = (): ReactElement => {
         <option>price</option>
       </select>
       <form
-        onSubmit={() => {
+        onSubmit={(e) => {
+          e.preventDefault();
           if (genre) {
             setGenres([...genres, genre]);
             setGenre(null);
