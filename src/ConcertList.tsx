@@ -1,4 +1,6 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, {
+  ReactElement, useEffect, useState, useMemo,
+} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Link, useRouteMatch } from 'react-router-dom';
 
@@ -18,6 +20,11 @@ const ConcertList: React.FC = (): ReactElement => {
   useEffect(() => {
     dispatch({ type: 'REQ_CONCERTS', payload: { id: 1 } });
   }, [dispatch]);
+
+  // eslint-disable-next-line max-len
+  const concertsWithGenre = useMemo(() => concerts.filter((concert: ConcertType) => genres.length === 0
+          || concert.artists.filter((artist) => genres.includes(artist.genre)).length > 0)
+    .filter((concert) => (date ? concert.date === date : true)), [concerts, genres, date]);
 
   return (
     <div>
@@ -56,31 +63,28 @@ const ConcertList: React.FC = (): ReactElement => {
       <Route exact path={match.path}>
         <div>
           <div>
-            {concerts.filter((concert: ConcertType) => genres.length === 0
-                || concert.artists.filter((artist) => genres.includes(artist.genre)).length > 0)
-              .filter((concert) => (date ? concert.date === date : true))
-              .map((concert: ConcertType) => (
-                <div key={concert.id}>
-                  <Link
-                    to={{
-                      pathname: `${match.url}/${concert.id}`,
-                      state: {
-                        title: concert.title,
-                        price: concert.price,
-                          address: concert.address
-                      },
-                    }}
-                  >
-                    {concert.title}
-                  </Link>
-                  <br />
-                  {concert.price}
-                  {concert?.artists[0]?.name}
-                  {concert?.artists[0]?.genre}
-                  {concert.time}
-                  {concert.date}
-                </div>
-              ))}
+            {concertsWithGenre.map((concert: ConcertType) => (
+              <div key={concert.id}>
+                <Link
+                  to={{
+                    pathname: `${match.url}/${concert.id}`,
+                    state: {
+                      title: concert.title,
+                      price: concert.price,
+                      address: concert.address,
+                    },
+                  }}
+                >
+                  {concert.title}
+                </Link>
+                <br />
+                {concert.price}
+                {concert?.artists[0]?.name}
+                {concert?.artists[0]?.genre}
+                {concert.time}
+                {concert.date}
+              </div>
+            ))}
           </div>
         </div>
       </Route>
