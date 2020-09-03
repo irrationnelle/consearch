@@ -11,12 +11,12 @@ function concert(
   action: { type: string; payload: { concerts: RawConcert[] } },
 ) : {concerts: RawConcert[]} {
   switch (action.type) {
-    case 'REQ_CONCERTS_SUCCEEDED':
+    case 'concerts/readSuccess':
       return {
         ...state,
         concerts: [...action.payload.concerts],
       };
-    case 'REQ_CONCERTS_FAILED':
+    case 'concerts/readFail':
     default:
       return state;
   }

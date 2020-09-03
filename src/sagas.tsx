@@ -7,15 +7,15 @@ import { RawConcert } from './@models/concert';
 function* fetchConcerts() {
   try {
     const concerts: RawConcert[] = yield call(retrieveConcerts);
-    yield put({ type: 'REQ_CONCERTS_SUCCEEDED', payload: { concerts } });
+    yield put({ type: 'concerts/readSuccess', payload: { concerts } });
   } catch (e) {
-    yield put({ type: 'REQ_CONCERTS_FAILED', message: e });
+    yield put({ type: 'concerts/readFail', message: e });
   }
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function* mySaga() {
-  yield takeLatest('REQ_CONCERTS', fetchConcerts);
+  yield takeLatest('concerts/read', fetchConcerts);
 }
 
 export { mySaga, fetchConcerts };

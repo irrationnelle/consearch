@@ -29,7 +29,7 @@ const ConcertList: React.FC = (): ReactElement => {
   [concerts, genres, date]);
 
   useEffect(() => {
-    dispatch({ type: 'REQ_CONCERTS', payload: { id: 1 } });
+    dispatch({ type: 'concerts/read', payload: { id: 1 } });
   }, [dispatch]);
 
   return (

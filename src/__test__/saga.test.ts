@@ -22,8 +22,8 @@ it('fetches concerts', () => {
   const concerts = mockConcerts;
 
   return expectSaga(mySaga)
-    .put({ type: 'REQ_CONCERTS_SUCCEEDED', payload: { concerts } })
-    .dispatch({ type: 'REQ_CONCERTS' })
+    .put({ type: 'concerts/readSuccess', payload: { concerts } })
+    .dispatch({ type: 'concerts/read' })
     .silentRun();
 });
 
@@ -32,7 +32,7 @@ it('handles errors', () => {
 
   return expectSaga(mySaga)
     .provide([[call(retrieveConcerts), throwError(error)]])
-    .put({ type: 'REQ_CONCERTS_FAILED', message: error })
-    .dispatch({ type: 'REQ_CONCERTS' })
+    .put({ type: 'concerts/readFail', message: error })
+    .dispatch({ type: 'concerts/read' })
     .run();
 });
