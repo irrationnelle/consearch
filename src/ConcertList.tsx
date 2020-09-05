@@ -13,20 +13,14 @@ const ConcertList: React.FC = (): ReactElement => {
   const match = useRouteMatch();
   const concerts = useSelector(concertsSelector);
 
-  const [genres, setGenres] = useState<string[]>([]);
   const [genre, setGenre] = useState<string | null>(null);
   const [date, setDate] = useState<string | null>(null);
 
   const concertsWithGenreAndDate = useMemo(() => {
-    const hasAllGenres = genres.length === 0;
-    const hasSelectGenre = (concert: ConcertType) => concert.artists.filter(
-      (artist) => genres.includes(artist.genre),
-    ).length > 0;
-    const byGenre = (concert: ConcertType) => hasAllGenres || hasSelectGenre(concert);
     const byDate = (concert: ConcertType) => (date ? concert.date === date : true);
-    return concerts.filter(byGenre).filter(byDate);
+    return concerts.filter(byDate);
   },
-  [concerts, genres, date]);
+  [concerts, date]);
 
   useEffect(() => {
     dispatch({ type: 'concerts/read', payload: { id: 1 } });
@@ -43,7 +37,7 @@ const ConcertList: React.FC = (): ReactElement => {
         onSubmit={(e) => {
           e.preventDefault();
           if (genre) {
-            setGenres([...genres, genre]);
+            dispatch({ type: 'concerts/addGenre', payload: { genre } });
             setGenre(null);
           }
         }}

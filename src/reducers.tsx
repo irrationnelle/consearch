@@ -2,10 +2,10 @@ import { RawConcert } from './@models/concert';
 
 const initialState: {
     concerts: RawConcert[];
-    inputGenres: string[]
+    inputedGenres: string[];
 } = {
   concerts: [],
-  inputGenres: [],
+  inputedGenres: [],
 };
 
 interface Action {
@@ -14,7 +14,7 @@ interface Action {
 
 interface GenreAction extends Action{
     payload: {
-      genres: string[]
+      genre: string
     }
 }
 
@@ -29,7 +29,7 @@ type TotalAction = ConcertsAction | GenreAction;
 function concert(
   state = initialState,
   action: TotalAction,
-) : { concerts: RawConcert[]; inputGenres: string[] } {
+) : { concerts: RawConcert[]; inputedGenres: string[] } {
   switch (action.type) {
     case 'concerts/readSuccess':
       return {
@@ -39,7 +39,10 @@ function concert(
     case 'concerts/addGenre':
       return {
         ...state,
-        inputGenres: [...(action as GenreAction).payload.genres],
+        inputedGenres: [
+          ...state.inputedGenres,
+          (action as GenreAction).payload.genre,
+        ],
       };
     case 'concerts/readFail':
     default:

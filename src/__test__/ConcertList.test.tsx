@@ -9,8 +9,9 @@ import { RawConcert } from '../@models/concert';
 describe('concert list', () => {
   it('콘서트 리스트에서 콘서트를 클릭하면 콘서트로 이동한다.', () => {
     // given
-    const initialState: { concerts: RawConcert[] } = {
+    const initialState: { concerts: RawConcert[], inputedGenres: string[] } = {
       concerts: mockConcerts,
+      inputedGenres: [],
     };
 
     const { container, getByText } = render(<ConcertList />, {
@@ -28,8 +29,9 @@ describe('concert list', () => {
 
   it('콘서트 리스트에는 가격, 밴드이름, 밴드 장르, 시간표가 나타나야 한다.', () => {
     // given
-    const initialState: { concerts: RawConcert[] } = {
+    const initialState: { concerts: RawConcert[], inputedGenres: string[] } = {
       concerts: mockConcerts,
+      inputedGenres: [],
     };
 
     // when
@@ -53,8 +55,9 @@ describe('concert list', () => {
 
   it('콘서트 목록에 옵션을 입력만 하면 어떤 콘서트 목록도 나타나지 않는다.', () => {
     // given
-    const initialState: { concerts: RawConcert[] } = {
+    const initialState: { concerts: RawConcert[], inputedGenres: string[] } = {
       concerts: mockConcerts,
+      inputedGenres: [],
     };
     const { container, getByLabelText } = render(<ConcertList />, {
       initialState,
@@ -74,8 +77,9 @@ describe('concert list', () => {
 
   it('콘서트 목록에 옵션을 입력한 뒤 추가 버튼을 누르면 옵션에 해당하는 콘서트 목록이 나타난다.', () => {
     // given
-    const initialState: { concerts: RawConcert[] } = {
+    const initialState: { concerts: RawConcert[], inputedGenres: string[] } = {
       concerts: mockConcerts,
+      inputedGenres: [],
     };
     const { container, getByTestId, getByLabelText } = render(<ConcertList />, {
       initialState,
@@ -96,8 +100,9 @@ describe('concert list', () => {
 
   it('콘서트 목록에 같은 종류의 옵션을 2개 이상 입력한 뒤 각각 추가 버튼을 누르면 둘 중 한가지라도 해당하는 콘서트 목록이 나타난다.', () => {
     // given
-    const initialState: { concerts: RawConcert[] } = {
+    const initialState: { concerts: RawConcert[], inputedGenres: string[] } = {
       concerts: mockConcerts,
+      inputedGenres: [],
     };
     const { container, getByTestId, getByLabelText } = render(<ConcertList />, {
       initialState,
@@ -123,8 +128,9 @@ describe('concert list', () => {
 
   it('콘서트 목록에 알 수 없는 옵션값을 입력하면 콘서트 목록이 비어있다', () => {
     // given
-    const initialState: { concerts: RawConcert[] } = {
+    const initialState: { concerts: RawConcert[], inputedGenres: string[] } = {
       concerts: mockConcerts,
+      inputedGenres: [],
     };
     const { container, getByTestId, getByLabelText } = render(<ConcertList />, {
       initialState,
@@ -149,8 +155,9 @@ describe('concert list', () => {
 
   it('콘서트 목록에 장르와 시간 날짜, 가격 등의 옵션을 조합하면 거기에 해당하는 결과가 나온다.', () => {
     // given
-    const initialState: { concerts: RawConcert[] } = {
+    const initialState: { concerts: RawConcert[], inputedGenres: string[] } = {
       concerts: mockConcerts,
+      inputedGenres: [],
     };
     const { container, getByTestId, getByLabelText } = render(<ConcertList />, {
       initialState,
