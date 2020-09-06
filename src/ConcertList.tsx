@@ -1,5 +1,5 @@
 import React, {
-  ReactElement, useEffect, useState, useMemo,
+  ReactElement, useEffect, useState,
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Link, useRouteMatch } from 'react-router-dom';
@@ -15,12 +15,6 @@ const ConcertList: React.FC = (): ReactElement => {
 
   const [genre, setGenre] = useState<string | null>(null);
   const [date, setDate] = useState<string | null>(null);
-
-  const concertsWithGenreAndDate = useMemo(() => {
-    const byDate = (concert: ConcertType) => (date ? concert.date === date : true);
-    return concerts.filter(byDate);
-  },
-  [concerts, date]);
 
   useEffect(() => {
     dispatch({ type: 'concerts/read', payload: { id: 1 } });
@@ -38,7 +32,9 @@ const ConcertList: React.FC = (): ReactElement => {
           e.preventDefault();
           if (genre) {
             dispatch({ type: 'concerts/addGenre', payload: { genre } });
+            dispatch({ type: 'concerts/addDate', payload: { date } });
             setGenre(null);
+            setDate(null);
           }
         }}
         data-testid="form-add-genre"
@@ -64,7 +60,7 @@ const ConcertList: React.FC = (): ReactElement => {
       <Route exact path={match.path}>
         <div>
           <div>
-            {concertsWithGenreAndDate.map((concert: ConcertType) => (
+            {concerts.map((concert: ConcertType) => (
               <div key={concert.id}>
                 <Link
                   to={{
