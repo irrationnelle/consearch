@@ -3,12 +3,13 @@ import { format, parseISO } from 'date-fns';
 
 import { RawConcert, Concert } from './@models/concert';
 
-const getState =
-  (state: {concerts: RawConcert[], inputedGenres: string[], inputedDate: string}) => state;
+interface ConcertState {concerts: RawConcert[], inputedGenres: string[], inputedDate: string}
 
-const getSelector = createSelector(getState, (state: unknown) => state);
+const getState = (state: ConcertState) => state;
+
+const getSelector = createSelector(getState, (state: ConcertState) => state);
 const concertsSelector = createSelector(getState,
-  ({concerts, inputedGenres, inputedDate}: {concerts: RawConcert[], inputedGenres: string[], inputedDate: string}) => {
+  ({ concerts, inputedGenres, inputedDate }: ConcertState) => {
     const currentConcerts = concerts.map((concert) => ({
       ...concert,
       time: format(parseISO(concert.timetable), 'HH:mma'),
