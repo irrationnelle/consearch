@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector, OutputSelector } from 'reselect';
 import { format, parseISO } from 'date-fns';
 
 import { RawConcert, Concert } from './@models/concert';
@@ -25,4 +25,14 @@ const concertsSelector = createSelector(getState,
     return currentConcerts.filter(byGenre).filter(byDate);
   });
 
-export { getSelector, concertsSelector };
+const concertSelector = (concertId: number): any => createSelector(concertsSelector, (concerts: Concert[]) => {
+  const currentConcert = concerts.reduce((acc, curr) => {
+    if (curr.id === concertId) {
+      acc = curr;
+    }
+    return acc;
+  });
+  return currentConcert;
+});
+
+export { getSelector, concertsSelector, concertSelector };

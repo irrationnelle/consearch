@@ -62,16 +62,7 @@ const ConcertList: React.FC = (): ReactElement => {
           <div>
             {concerts.map((concert: ConcertType) => (
               <div key={concert.id}>
-                <Link
-                  to={{
-                    pathname: `${match.url}/${concert.id}`,
-                    state: {
-                      title: concert.title,
-                      price: concert.price,
-                      address: concert.address,
-                    },
-                  }}
-                >
+                <Link to={`${match.url}/${concert.id}`}>
                   {concert.title}
                 </Link>
                 <br />
