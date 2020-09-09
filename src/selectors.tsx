@@ -25,9 +25,11 @@ const concertsSelector = createSelector(getState,
     return currentConcerts.filter(byGenre).filter(byDate);
   });
 
-const concertSelector = (concertId: number): any => createSelector(concertsSelector, (concerts: Concert[]) => {
+const concertSelector = (concertId: number | string): any => createSelector(concertsSelector, (concerts: Concert[]) => {
+  const currentConcertId = typeof concertId === 'number' ? concertId : parseInt(concertId, 10);
+
   const currentConcert = concerts.reduce((acc, curr) => {
-    if (curr.id === concertId) {
+    if (curr.id === currentConcertId) {
       acc = curr;
     }
     return acc;

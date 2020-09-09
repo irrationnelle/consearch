@@ -7,28 +7,21 @@ import { History } from 'history';
 import { concertSelector } from './selectors';
 import ConcertLocationMap from './ConcertLocationMap';
 
-export const path = (url: string) => {
-  const fixedPath: string = url.endsWith('/')
-    ? path(url.substring(0, url.length - 1))
+export const path = (url: string): string => {
+  const fixedPath: string = url.startsWith('/')
+    ? path(url.substring(1))
     : url;
 
   return fixedPath;
 };
 
-
 const Concert: React.FC = (): ReactElement => {
-  const history: History = useHistory();
-  const match = useRouteMatch();
+  const { goBack }: History = useHistory();
+  const { url } = useRouteMatch();
 
-  const concertId = parseInt(match.url.replace('/', '').replace('/', ''), 10);
-
-  console.log('match', match);
+  const concertId = path(url);
 
   const { title, price, address } = useSelector(concertSelector(concertId));
-
-  const goBack = () => {
-    history.goBack();
-  };
 
   return (
     <div>
