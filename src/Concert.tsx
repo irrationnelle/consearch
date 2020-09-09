@@ -1,8 +1,6 @@
 import React, { ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { History } from 'history';
 
 import { concertSelector } from './selectors';
 import ConcertLocationMap from './ConcertLocationMap';
@@ -16,7 +14,7 @@ export const path = (url: string): string => {
 };
 
 const Concert: React.FC = (): ReactElement => {
-  const { goBack }: History = useHistory();
+  const { goBack } = useHistory();
   const { url } = useRouteMatch();
 
   const concertId = path(url);
