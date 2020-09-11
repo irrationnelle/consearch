@@ -1,9 +1,11 @@
-import { createSelector, OutputSelector } from 'reselect';
+import { createSelector } from 'reselect';
 import { format, parseISO } from 'date-fns';
 
 import { RawConcert, Concert } from './@models/concert';
 
 interface ConcertState {concerts: RawConcert[], inputedGenres: string[], inputedDate: string}
+
+const toDecimalInteger = (targetParam: number | string): number => (typeof targetParam === 'number' ? targetParam : parseInt(targetParam, 10));
 
 const getState = (state: ConcertState) => state;
 
@@ -26,15 +28,8 @@ const concertsSelector = createSelector(getState,
   });
 
 const concertSelector = (concertId: number | string): any => createSelector(concertsSelector, (concerts: Concert[]) => {
-  const currentConcertId = typeof concertId === 'number' ? concertId : parseInt(concertId, 10);
-
-  const currentConcert = concerts.reduce((acc, curr) => {
-    if (curr.id === currentConcertId) {
-      acc = curr;
-    }
-    return acc;
-  });
-  return currentConcert;
+  const currentConcertId = toDecimalInteger(concertId);
+  return concerts.reduce((acc, curr) => (curr.id === currentConcertId ? curr : acc));
 });
 
 export { getSelector, concertsSelector, concertSelector };
