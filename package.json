@@ -24,7 +24,8 @@
         "build-storybook": "build-storybook -s public",
         "lint:init": "eslint --init",
         "lint": "eslint",
-        "lint:fix": "eslint --fix"
+        "lint:fix": "eslint --fix",
+        "coverage": "CI=true npm test -- --env=jsdom --coverage"
     },
     "eslintConfig": {
         "env": {
