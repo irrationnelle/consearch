@@ -8,6 +8,25 @@ import Concert from './Concert';
 import { concertsSelector } from './selectors';
 import { Concert as ConcertType } from './@models/concert';
 
+interface IndividualConcertProps {
+    url: string;
+    concert: ConcertType
+}
+
+const IndividualConcert: React.FC<IndividualConcertProps> = ({ url, concert }: IndividualConcertProps): ReactElement => (
+  <div>
+    <Link to={url}>
+      {concert.title}
+    </Link>
+    <br />
+    {concert.price}
+    {concert?.artists[0]?.name}
+    {concert?.artists[0]?.genre}
+    {concert.time}
+    {concert.date}
+  </div>
+);
+
 const ConcertList: React.FC = (): ReactElement => {
   const dispatch = useDispatch();
   const match = useRouteMatch();
@@ -60,19 +79,7 @@ const ConcertList: React.FC = (): ReactElement => {
       <Route exact path={match.path}>
         <div>
           <div>
-            {concerts.map((concert: ConcertType) => (
-              <div key={concert.id}>
-                <Link to={`${match.url}/${concert.id}`}>
-                  {concert.title}
-                </Link>
-                <br />
-                {concert.price}
-                {concert?.artists[0]?.name}
-                {concert?.artists[0]?.genre}
-                {concert.time}
-                {concert.date}
-              </div>
-            ))}
+            {concerts.map((concert: ConcertType) => (<IndividualConcert key={concert.id} url={`${match.url}/${concert.id}`} concert={concert} />))}
           </div>
         </div>
       </Route>
