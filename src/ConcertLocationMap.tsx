@@ -1,4 +1,5 @@
 import React, { ReactElement, useEffect } from 'react';
+import styled from 'styled-components';
 
 // eslint-disable-next-line import/no-unresolved
 import { CustomWindow } from './@types/custom.window';
@@ -58,8 +59,12 @@ const ConcertLocationMap: React.FC<Props> = ({ address }: Props): ReactElement =
       });
     };
   }, [address]);
-
-  return <div id="map" style={{ width: '500px', height: '400px' }} />;
+  return <MapWrapper id="map" />;
 };
+
+const MapWrapper = styled.div`
+    width: 80%;
+    height: 50%;
+`;
 
 export default ConcertLocationMap;

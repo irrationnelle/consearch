@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { concertSelector } from './selectors';
 import ConcertLocationMap from './ConcertLocationMap';
@@ -22,19 +23,41 @@ const Concert: React.FC = (): ReactElement => {
   const { title, price, address } = useSelector(concertSelector(concertId));
 
   return (
-    <div>
-      <button type="button" onClick={goBack}>back</button>
-      <div>
-        <span>title</span>
-        <span>{title}</span>
-      </div>
-      <div>
-        <span>price</span>
-        <span>{price}</span>
-      </div>
+    <ConcertWrapper>
+      <BackButtonWrapper>
+        <button type="button" onClick={goBack}>back</button>
+      </BackButtonWrapper>
+      <TextWrapper>
+        <TextContent width="25%">title: </TextContent>
+        <TextContent width="75%">{title}</TextContent>
+      </TextWrapper>
+      <TextWrapper>
+        <TextContent width="25%">price: </TextContent>
+        <TextContent width="75%">{price}</TextContent>
+      </TextWrapper>
       <ConcertLocationMap address={address} />
-    </div>
+    </ConcertWrapper>
   );
 };
+
+const ConcertWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+const BackButtonWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+`;
+
+const TextWrapper = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const TextContent = styled.div<{width: string}>`
+    width: ${({ width }: {width: string}) => width}
+`;
 
 export default Concert;
