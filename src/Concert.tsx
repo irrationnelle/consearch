@@ -35,19 +35,23 @@ const Concert: React.FC = (): ReactElement => {
         <TextContent width="25%">price: </TextContent>
         <TextContent width="75%">{price}</TextContent>
       </TextWrapper>
-      <ConcertLocationMap address={address} />
+      <MapWrapper>
+        <ConcertLocationMap address={address} />
+      </MapWrapper>
     </ConcertWrapper>
   );
 };
 
 const ConcertWrapper = styled.div`
+    width: 500px;
+    height: 500px;
     display: flex;
     flex-direction: column;
+    border: 1px solid black;
 `;
 
 const BackButtonWrapper = styled.div`
     display: flex;
-    justify-content: flex-end;
     align-items: center;
 `;
 
@@ -58,6 +62,12 @@ const TextWrapper = styled.div`
 
 const TextContent = styled.div<{width: string}>`
     width: ${({ width }: {width: string}) => width}
+`;
+
+const MapWrapper = styled.div`
+    position: relative;
+    width: 100%;
+    height: 80%;
 `;
 
 export default Concert;
