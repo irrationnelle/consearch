@@ -63,8 +63,8 @@ const ConcertLocationMap: React.FC<Props> = ({ address }: Props): ReactElement =
 };
 
 const MapWrapper = styled.div`
-    width: 80%;
-    height: 50%;
+    width: 100%;
+    height: 100%;
 `;
 
 export default ConcertLocationMap;
