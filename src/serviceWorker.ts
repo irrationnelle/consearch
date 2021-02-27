@@ -25,6 +25,7 @@ type Config = {
   onUpdate?: (registration: ServiceWorkerRegistration) => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function register(config?: Config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -49,6 +50,7 @@ export function register(config?: Config) {
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {
+          // eslint-disable-next-line no-console
           console.log(
             'This web app is being served cache-first by a service '
               + 'worker. To learn more, visit https://bit.ly/CRA-PWA',
@@ -141,6 +143,7 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
     });
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function unregister() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready

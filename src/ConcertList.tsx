@@ -13,6 +13,7 @@ interface IndividualConcertProps {
     concert: ConcertType
 }
 
+// eslint-disable-next-line max-len
 const IndividualConcert: React.FC<IndividualConcertProps> = ({ url, concert }: IndividualConcertProps): ReactElement => (
   <div>
     <Link to={url}>

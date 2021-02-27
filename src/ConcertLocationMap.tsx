@@ -35,6 +35,7 @@ const ConcertLocationMap: React.FC<Props> = ({ address }: Props): ReactElement =
         const geocoder = new kakao.maps.services.Geocoder();
 
         // 주소로 좌표를 검색합니다
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         geocoder.addressSearch(address, (result: any, status: any) => {
           // 정상적으로 검색이 완료됐으면
           if (status === kakao.maps.services.Status.OK) {

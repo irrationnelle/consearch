@@ -18,7 +18,7 @@ const App: FC = (): ReactElement => (
             <Link to="/concerts">Concerts</Link>
           </div>
           <div>Artists</div>
-          <div>Today's Pick</div>
+          <div>Today Pick</div>
         </HeaderNav>
 
         <Switch>

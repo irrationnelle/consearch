@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createMemoryHistory } from 'history';
