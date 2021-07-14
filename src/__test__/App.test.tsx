@@ -16,5 +16,5 @@ test('full app rendering/navigating', () => {
   );
     // verify page content for expected route
     // often you'd use a data-testid or role query, but this is also possible
-  expect(container.innerHTML).toMatch('main');
+  expect(container.innerHTML).toMatch('Main');
 });
