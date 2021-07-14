@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+import { addDoc, collection, getFirestore } from 'firebase/firestore';
 import { RawConcert } from '../@models/concert';
 import { mockConcerts } from '../__mock__/data';
+import { ConcertProperty } from '../InputData';
 
 const { REACT_APP_DOMAIN_API_URL } = process.env;
 
@@ -23,4 +25,10 @@ const retrieveConcert = async (id: number): Promise<RawConcert> => {
   return data;
 };
 
-export { retrieveConcerts, retrieveConcert };
+const createConcert = async (newConcert: ConcertProperty): Promise<ConcertProperty> => {
+  const db = getFirestore();
+  await addDoc(collection(db, 'concerts'), newConcert);
+  return newConcert;
+};
+
+export { retrieveConcerts, retrieveConcert, createConcert };

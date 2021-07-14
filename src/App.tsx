@@ -1,35 +1,46 @@
 import React, { FC, ReactElement } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import {
   BrowserRouter as Router, Switch, Route, Link,
 } from 'react-router-dom';
 import styled from 'styled-components';
 
 import ConcertList from './ConcertList';
+import InputData from './InputData';
+import InitializationProvider from './contexts/InitializationContext';
+
+const queryClient = new QueryClient();
 
 const App: FC = (): ReactElement => (
   <Wrapper>
     <Router>
-      <AppWrapper>
-        <HeaderNav>
-          <div>
-            <Link to="/">Main</Link>
-          </div>
-          <div>
-            <Link to="/concerts">Concerts</Link>
-          </div>
-          <div>Artists</div>
-          <div>Today Pick</div>
-        </HeaderNav>
+      <QueryClientProvider client={queryClient}>
+        <InitializationProvider>
+          <AppWrapper>
+            <HeaderNav>
+              <div>
+                <Link to="/">Main</Link>
+              </div>
+              <div>
+                <Link to="/concerts">Concerts</Link>
+              </div>
+              <div>Artists</div>
+              <div>
+                <Link to="/input">input</Link>
+              </div>
+            </HeaderNav>
 
-        <Switch>
-          <Route path="/concerts">
-            <ConcertList />
-          </Route>
-          <Route path="/">
-            <div>main</div>
-          </Route>
-        </Switch>
-      </AppWrapper>
+            <Switch>
+              <Route path="/concerts">
+                <ConcertList />
+              </Route>
+              <Route path="/input">
+                <InputData />
+              </Route>
+            </Switch>
+          </AppWrapper>
+        </InitializationProvider>
+      </QueryClientProvider>
     </Router>
   </Wrapper>
 );
