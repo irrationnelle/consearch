@@ -14,9 +14,9 @@ const server = setupServer(
   rest.get(`${REACT_APP_DOMAIN_API_URL}/concerts`, (req, res, ctx) => res(ctx.json(mockConcerts))),
 );
 
-beforeAll(() => server.listen());
+beforeEach(() => server.listen());
 
-afterAll(() => server.close());
+afterEach(() => server.close());
 
 it('fetches concerts', () => {
   const concerts = mockConcerts;
