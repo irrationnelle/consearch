@@ -26,9 +26,21 @@ const retrieveConcert = async (id: number): Promise<RawConcert> => {
 };
 
 const createConcert = async (newConcert: ConcertProperty): Promise<ConcertProperty> => {
-  const db = getFirestore();
-  await addDoc(collection(db, 'concerts'), newConcert);
-  return newConcert;
+  try {
+    const db = getFirestore();
+    await addDoc(collection(db, 'concerts'), newConcert);
+    return newConcert;
+  } catch (e) {
+    console.error(e);
+    return {
+      title: '에러',
+      artist: '에러',
+      stage: '에러',
+      address: '에러',
+      genre: '에러',
+      date: '에러',
+    };
+  }
 };
 
 export { retrieveConcerts, retrieveConcert, createConcert };
