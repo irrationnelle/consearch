@@ -4,7 +4,7 @@ steps:
          '--build-arg',
          'REACT_APP_KAKAO_MAP_API_KEY=${_REACT_APP_KAKAO_MAP_API_KEY}',
          '--build-arg',
-         'REACT_APP_DOMAIN_API_URL=${_REACT_APP_DOMAIN_API_URL}',      
+         'REACT_APP_DOMAIN_API_URL=${_REACT_APP_DOMAIN_API_URL}',
          '--build-arg',
          'REACT_APP_FIREBASE_API_KEY=${_REACT_APP_FIREBASE_API_KEY}',
          '--build-arg',
@@ -13,8 +13,6 @@ steps:
          'REACT_APP_FIREBASE_PROJECT_ID=${_REACT_APP_FIREBASE_PROJECT_ID}',
          '--build-arg',
          'REACT_APP_FIREBASE_STORAGE_BUCKET=${_REACT_APP_FIREBASE_STORAGE_BUCKET}',
-         '--build-arg',
-         'REACT_APP_KAKAO_MAP_API_KEY=${_REACT_APP_KAKAO_MAP_API_KEY}',
          '-t',
          'gcr.io/$PROJECT_ID/cra-cloud-run',
          '.']
