@@ -1,12 +1,10 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { act, waitFor } from '@testing-library/react';
-import { render, screen } from '../helpers/test-utils';
+import { renderWithProviders, screen } from '../helpers/test-utils';
 
 import InputData from '../InputData';
 import inputTextByLabel from './helper/inputTextByLabel';
-import InitializationProvider from '../contexts/InitializationContext';
 
 const EXAMPLE_DATA = {
   title: '마스토돈',
@@ -19,16 +17,8 @@ const EXAMPLE_DATA = {
 };
 
 describe('데이터 입력 화면 테스트에서,', () => {
-  const queryClient = new QueryClient();
-
   beforeEach(() => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <InitializationProvider>
-          <InputData />
-        </InitializationProvider>
-      </QueryClientProvider>,
-    );
+    renderWithProviders(<InputData />);
   });
 
   it('필수 입력 데이터를 모두 입력하지 않으면 전송 버튼을 disabled 처리한다.', () => {
