@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import ConcertList from './ConcertList';
 import InputData from './InputData';
 import InitializationProvider from './contexts/InitializationContext';
+import ReadConcerts from './ReadConcerts';
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,9 @@ const App: FC = (): ReactElement => (
               <div>
                 <Link to="/input">input</Link>
               </div>
+              <div>
+                <Link to="/read">read</Link>
+              </div>
             </HeaderNav>
 
             <Switch>
@@ -36,6 +40,9 @@ const App: FC = (): ReactElement => (
               </Route>
               <Route path="/input">
                 <InputData />
+              </Route>
+              <Route path="/read">
+                <ReadConcerts />
               </Route>
             </Switch>
           </AppWrapper>

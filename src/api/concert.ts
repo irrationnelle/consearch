@@ -1,6 +1,7 @@
 import axios from 'axios';
-
-import { addDoc, collection, getFirestore } from 'firebase/firestore';
+import {
+  addDoc, collection, getFirestore, getDocs,
+} from 'firebase/firestore';
 import { RawConcert } from '../@models/concert';
 import { mockConcerts } from '../__mock__/data';
 import { ConcertProperty } from '../InputData';
@@ -44,7 +45,17 @@ const createConcert = async (newConcert: ConcertProperty): Promise<ConcertProper
   }
 };
 
-const readConcertApi = async (): Promise<ConcertProperty[]> => [];
+const readConcertApi = async (): Promise<ConcertProperty[]> => {
+  try {
+    const db = getFirestore();
+    const querySnapshot = await getDocs(collection(db, 'concerts'));
+    return querySnapshot.docs.map((currentDoc) => currentDoc.data() as ConcertProperty);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+    return [];
+  }
+};
 
 export {
   retrieveConcerts, retrieveConcert, createConcert, readConcertApi,
