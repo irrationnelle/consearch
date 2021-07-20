@@ -1,30 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactElement } from 'react';
 import { useQuery } from 'react-query';
+import { readConcertApi } from './api/concert';
 import { ConcertProperty } from './InputData';
 
-const EXAMPLE_DATA = {
-  title: '마스토돈',
-  artist: '마스토돈',
-  stage: '롤링홀',
-  address: '서울 마포구 어울마당로 35',
-  genre: 'rockmetal',
-  date: '2021-06-26-20:00',
-  coverImage: '',
-};
-
-const SECOND_EXAMPLE_DATA = {
-  title: '라니아 공연',
-  artist: '라니아',
-  stage: 'FF',
-  address: '서울 마포구 어울마당로 37',
-  genre: '인디락',
-  date: '2021-07-20-20:00',
-  coverImage: '',
-};
-
-const readConcertApi = async () => [EXAMPLE_DATA, SECOND_EXAMPLE_DATA];
-
-const ReadConcerts = () => {
+const ReadConcerts = (): ReactElement => {
   const { data: concerts } = useQuery<ConcertProperty[]>('readConcerts', readConcertApi);
 
   return (

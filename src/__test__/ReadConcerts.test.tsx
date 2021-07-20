@@ -1,5 +1,7 @@
 import React from 'react';
+import { waitFor } from '@testing-library/react';
 import { renderWithProviders, screen } from '../helpers/test-utils';
+import * as api from '../api/concert';
 import ReadConcerts from '../ReadConcerts';
 
 describe('ReadConcerts 에서는,', () => {
@@ -15,9 +17,6 @@ describe('ReadConcerts 에서는,', () => {
   });
 
   it('컴포넌트를 렌더링하면 공연 목록을 읽는다.', () => {
-    const concerts = screen.getAllByRole('listitem');
-    const firstConcert = concerts[0];
-
     const EXAMPLE_DATA = {
       title: '마스토돈',
       artist: '마스토돈',
@@ -28,14 +27,6 @@ describe('ReadConcerts 에서는,', () => {
       coverImage: '',
     };
 
-    expect(firstConcert).toHaveTextContent(EXAMPLE_DATA.title);
-    expect(firstConcert).toHaveTextContent(EXAMPLE_DATA.artist);
-    expect(firstConcert).toHaveTextContent(EXAMPLE_DATA.genre);
-    expect(firstConcert).toHaveTextContent(EXAMPLE_DATA.stage);
-    expect(firstConcert).toHaveTextContent(EXAMPLE_DATA.address);
-    expect(firstConcert).toHaveTextContent(EXAMPLE_DATA.date);
-
-    const secondConcert = concerts[1];
     const SECOND_EXAMPLE_DATA = {
       title: '라니아 공연',
       artist: '라니아',
@@ -46,11 +37,27 @@ describe('ReadConcerts 에서는,', () => {
       coverImage: '',
     };
 
-    expect(secondConcert).toHaveTextContent(SECOND_EXAMPLE_DATA.title);
-    expect(secondConcert).toHaveTextContent(SECOND_EXAMPLE_DATA.artist);
-    expect(secondConcert).toHaveTextContent(SECOND_EXAMPLE_DATA.genre);
-    expect(secondConcert).toHaveTextContent(SECOND_EXAMPLE_DATA.stage);
-    expect(secondConcert).toHaveTextContent(SECOND_EXAMPLE_DATA.address);
-    expect(secondConcert).toHaveTextContent(SECOND_EXAMPLE_DATA.date);
+    jest.spyOn(api, 'readConcertApi').mockResolvedValue([EXAMPLE_DATA, SECOND_EXAMPLE_DATA]);
+
+    waitFor(() => {
+      const concerts = screen.getAllByRole('listitem');
+      const firstConcert = concerts[0];
+
+      expect(firstConcert).toHaveTextContent(EXAMPLE_DATA.title);
+      expect(firstConcert).toHaveTextContent(EXAMPLE_DATA.artist);
+      expect(firstConcert).toHaveTextContent(EXAMPLE_DATA.genre);
+      expect(firstConcert).toHaveTextContent(EXAMPLE_DATA.stage);
+      expect(firstConcert).toHaveTextContent(EXAMPLE_DATA.address);
+      expect(firstConcert).toHaveTextContent(EXAMPLE_DATA.date);
+
+      const secondConcert = concerts[1];
+
+      expect(secondConcert).toHaveTextContent(SECOND_EXAMPLE_DATA.title);
+      expect(secondConcert).toHaveTextContent(SECOND_EXAMPLE_DATA.artist);
+      expect(secondConcert).toHaveTextContent(SECOND_EXAMPLE_DATA.genre);
+      expect(secondConcert).toHaveTextContent(SECOND_EXAMPLE_DATA.stage);
+      expect(secondConcert).toHaveTextContent(SECOND_EXAMPLE_DATA.address);
+      expect(secondConcert).toHaveTextContent(SECOND_EXAMPLE_DATA.date);
+    });
   });
 });

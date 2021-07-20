@@ -31,6 +31,7 @@ const createConcert = async (newConcert: ConcertProperty): Promise<ConcertProper
     await addDoc(collection(db, 'concerts'), newConcert);
     return newConcert;
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error(e);
     return {
       title: '에러',
@@ -43,4 +44,8 @@ const createConcert = async (newConcert: ConcertProperty): Promise<ConcertProper
   }
 };
 
-export { retrieveConcerts, retrieveConcert, createConcert };
+const readConcertApi = async (): Promise<ConcertProperty[]> => [];
+
+export {
+  retrieveConcerts, retrieveConcert, createConcert, readConcertApi,
+};
