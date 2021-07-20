@@ -22,10 +22,10 @@ const SECOND_EXAMPLE_DATA = {
 };
 
 const ReadConcerts = () => {
-  const [concerts] = useState<ConcertProperty[]>([EXAMPLE_DATA, SECOND_EXAMPLE_DATA]);
+  const [concerts, setConcerts] = useState<ConcertProperty[]>([]);
 
   useEffect(() => {
-    console.log('hello');
+    setConcerts((prev) => [...prev, EXAMPLE_DATA, SECOND_EXAMPLE_DATA]);
   }, []);
 
   return (
