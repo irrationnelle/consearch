@@ -8,11 +8,11 @@ type Props = {
 };
 
 const InitializationProvider = ({ children }: Props): JSX.Element => {
-  useFirebase();
+  const isFirebaseInitialized = useFirebase();
 
   return (
     <InitializationContext.Provider value={null}>
-      {children}
+      {isFirebaseInitialized ? children : null}
     </InitializationContext.Provider>
   );
 };
