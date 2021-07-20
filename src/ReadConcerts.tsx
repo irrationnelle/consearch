@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { ConcertProperty } from './InputData';
 
 const EXAMPLE_DATA = {
@@ -21,17 +22,15 @@ const SECOND_EXAMPLE_DATA = {
   coverImage: '',
 };
 
-const ReadConcerts = () => {
-  const [concerts, setConcerts] = useState<ConcertProperty[]>([]);
+const readConcertApi = async () => [EXAMPLE_DATA, SECOND_EXAMPLE_DATA];
 
-  useEffect(() => {
-    setConcerts((prev) => [...prev, EXAMPLE_DATA, SECOND_EXAMPLE_DATA]);
-  }, []);
+const ReadConcerts = () => {
+  const { data: concerts } = useQuery<ConcertProperty[]>('readConcerts', readConcertApi);
 
   return (
     <div data-testid="read-concerts">
       <div role="list">
-        {concerts.map((concert) => (
+        {concerts?.map((concert) => (
           <div key={concert.title} role="listitem">
             <span>{concert.title}</span>
             <span>{concert.artist}</span>
