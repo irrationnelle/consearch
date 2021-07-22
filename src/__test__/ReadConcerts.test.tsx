@@ -25,6 +25,16 @@ const SECOND_EXAMPLE_DATA = {
   coverImage: '',
 };
 
+const THIRD_EXAMPLE_DATA = {
+  title: '마스토돈 내한공연',
+  artist: '마스토돈',
+  stage: 'V-HALL',
+  address: '서울 마포구 어울마당로 38',
+  genre: 'rockmetal',
+  date: '2021-07-22-21:00',
+  coverImage: '',
+};
+
 describe('ReadConcerts 에서는,', () => {
   beforeEach(() => {
     renderWithProviders(
@@ -64,7 +74,7 @@ describe('ReadConcerts 에서는,', () => {
     });
   });
 
-  it('공연 이름으로 원하는 공연을 검색할 수 있다.', () => {
+  it('공연 이름으로 원하는 공연 다수를 검색할 수 있다.', () => {
     inputTextByLabel('title-search', EXAMPLE_DATA.title);
 
     // then
@@ -87,6 +97,13 @@ describe('ReadConcerts 에서는,', () => {
       expect(secondConcert).not.toHaveTextContent(SECOND_EXAMPLE_DATA.stage);
       expect(secondConcert).not.toHaveTextContent(SECOND_EXAMPLE_DATA.address);
       expect(secondConcert).not.toHaveTextContent(SECOND_EXAMPLE_DATA.date);
+
+      expect(secondConcert).not.toHaveTextContent(THIRD_EXAMPLE_DATA.title);
+      expect(secondConcert).not.toHaveTextContent(THIRD_EXAMPLE_DATA.artist);
+      expect(secondConcert).not.toHaveTextContent(THIRD_EXAMPLE_DATA.genre);
+      expect(secondConcert).not.toHaveTextContent(THIRD_EXAMPLE_DATA.stage);
+      expect(secondConcert).not.toHaveTextContent(THIRD_EXAMPLE_DATA.address);
+      expect(secondConcert).not.toHaveTextContent(THIRD_EXAMPLE_DATA.date);
     });
   });
 });
