@@ -81,9 +81,10 @@ describe('ReadConcerts 에서는,', () => {
   it('공연 이름으로 원하는 공연 다수를 검색할 수 있다.', () => {
     jest.spyOn(api, 'readSingleConcertApiByTitle').mockResolvedValue([EXAMPLE_DATA, THIRD_EXAMPLE_DATA]);
 
-    inputTextByLabel('title-search', EXAMPLE_DATA.title);
-
-    fireEvent.click(screen.getByRole('button'));
+    waitFor(() => {
+      inputTextByLabel('title-search', EXAMPLE_DATA.title);
+      fireEvent.click(screen.getByRole('button'));
+    });
 
     waitFor(() => {
       // then

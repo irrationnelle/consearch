@@ -5,7 +5,10 @@ const useFirebase = (): boolean => {
   const [isInit, setInit] = useState<boolean>(false);
 
   useEffect(() => {
-    if (firebase.getApps().length > 0) return;
+    if (firebase.getApps().length > 0) {
+      setInit(true);
+      return;
+    }
 
     firebase.initializeApp({
       apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
