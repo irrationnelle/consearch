@@ -1,11 +1,11 @@
 import React from 'react';
-import { waitFor } from '@testing-library/react';
+import { waitFor, fireEvent } from '@testing-library/react';
 import { renderWithProviders, screen } from '../helpers/test-utils';
 import * as api from '../api/concert';
 import ReadConcerts from '../ReadConcerts';
 import inputTextByLabel from './helper/inputTextByLabel';
 
-const EXAMPLE_DATA = {
+export const EXAMPLE_DATA = {
   title: '마스토돈',
   artist: '마스토돈',
   stage: '롤링홀',
@@ -25,7 +25,7 @@ const SECOND_EXAMPLE_DATA = {
   coverImage: '',
 };
 
-const THIRD_EXAMPLE_DATA = {
+export const THIRD_EXAMPLE_DATA = {
   title: '마스토돈 내한공연',
   artist: '마스토돈',
   stage: 'V-HALL',
@@ -40,6 +40,10 @@ describe('ReadConcerts 에서는,', () => {
     renderWithProviders(
       <ReadConcerts />,
     );
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   it('해당 컴포넌트가 존재한다.', () => {
@@ -75,10 +79,14 @@ describe('ReadConcerts 에서는,', () => {
   });
 
   it('공연 이름으로 원하는 공연 다수를 검색할 수 있다.', () => {
+    jest.spyOn(api, 'readSingleConcertApiByTitle').mockResolvedValue([EXAMPLE_DATA, THIRD_EXAMPLE_DATA]);
+
     inputTextByLabel('title-search', EXAMPLE_DATA.title);
 
-    // then
+    fireEvent.click(screen.getByRole('button'));
+
     waitFor(() => {
+      // then
       const concerts = screen.getAllByRole('listitem');
       const firstConcert = concerts[0];
 
@@ -98,12 +106,12 @@ describe('ReadConcerts 에서는,', () => {
       expect(secondConcert).not.toHaveTextContent(SECOND_EXAMPLE_DATA.address);
       expect(secondConcert).not.toHaveTextContent(SECOND_EXAMPLE_DATA.date);
 
-      expect(secondConcert).not.toHaveTextContent(THIRD_EXAMPLE_DATA.title);
-      expect(secondConcert).not.toHaveTextContent(THIRD_EXAMPLE_DATA.artist);
-      expect(secondConcert).not.toHaveTextContent(THIRD_EXAMPLE_DATA.genre);
-      expect(secondConcert).not.toHaveTextContent(THIRD_EXAMPLE_DATA.stage);
-      expect(secondConcert).not.toHaveTextContent(THIRD_EXAMPLE_DATA.address);
-      expect(secondConcert).not.toHaveTextContent(THIRD_EXAMPLE_DATA.date);
+      expect(secondConcert).toHaveTextContent(THIRD_EXAMPLE_DATA.title);
+      expect(secondConcert).toHaveTextContent(THIRD_EXAMPLE_DATA.artist);
+      expect(secondConcert).toHaveTextContent(THIRD_EXAMPLE_DATA.genre);
+      expect(secondConcert).toHaveTextContent(THIRD_EXAMPLE_DATA.stage);
+      expect(secondConcert).toHaveTextContent(THIRD_EXAMPLE_DATA.address);
+      expect(secondConcert).toHaveTextContent(THIRD_EXAMPLE_DATA.date);
     });
   });
 });

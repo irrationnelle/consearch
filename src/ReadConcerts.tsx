@@ -1,15 +1,45 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { useQuery } from 'react-query';
-import { readConcertApi } from './api/concert';
+import { readConcertApi, readSingleConcertApiByTitle } from './api/concert';
 import { ConcertProperty } from './InputData';
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const useReadConcertByTitle = (title: string) => useQuery(['title', title], () => readSingleConcertApiByTitle(title));
 
 const ReadConcerts = (): ReactElement => {
   const { data: concerts } = useQuery<ConcertProperty[]>('readConcerts', readConcertApi);
 
+  const [title, setTitle] = useState<string>('');
+  const [currentTitle, setCurrentTitle] = useState<string>('');
+
+  const { data: searchedConcerts } = useReadConcertByTitle(currentTitle);
+
+  const currentConcerts = searchedConcerts?.length === 0 ? concerts : searchedConcerts;
+
   return (
     <div data-testid="read-concerts">
+      <div>
+        <label htmlFor="title-search">
+          title-search
+          <input
+            id="title-search"
+            value={title}
+            onChange={({ target: { value } }) => {
+              setTitle(value);
+            }}
+          />
+        </label>
+        <button
+          type="button"
+          onClick={() => {
+            setCurrentTitle(title);
+          }}
+        >
+          search
+        </button>
+      </div>
       <div role="list">
-        {concerts?.map((concert) => (
+        {currentConcerts?.map((concert) => (
           <div key={concert.title} role="listitem">
             <span>{concert.title}</span>
             <span>{concert.artist}</span>
