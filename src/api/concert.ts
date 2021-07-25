@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {
-  addDoc, collection, getFirestore, getDocs, where, query,
+  addDoc, collection, getFirestore, getDocs, where, query, documentId,
 } from 'firebase/firestore';
+import algoliasearch from 'algoliasearch';
 import { RawConcert } from '../@models/concert';
 import { mockConcerts } from '../__mock__/data';
 import { ConcertProperty } from '../InputData';
@@ -57,10 +58,19 @@ const readConcertApi = async (): Promise<ConcertProperty[]> => {
   }
 };
 
+const ALGOLIA_APP_ID: string = process.env.REACT_APP_ALGOLIA_APP_ID as string;
+const ALGOLIA_API_KEY: string = process.env.REACT_APP_ALGOLIA_API_KEY as string;
+const ALGOLIA_INDEX_NAME: string = process.env.REACT_APP_ALGOLIA_INDEX as string;
+
 const readSingleConcertApiByTitle = async (title: string): Promise<ConcertProperty[]> => {
   try {
-    const db = getFirestore();
-    const queryForConcert = await query(collection(db, 'concerts'), where('title', '==', title));
+    const algoliaClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
+    const algoliaIndex = algoliaClient.initIndex(ALGOLIA_INDEX_NAME);
+    const { hits: searchResults } = await algoliaIndex.search(title);
+    if (searchResults.length <= 0) return [];
+    const concertObjectIds = searchResults.map((searchResult) => searchResult.objectID);
+    const firestoreDatabase = getFirestore();
+    const queryForConcert = await query(collection(firestoreDatabase, 'concerts'), where(documentId(), 'in', concertObjectIds));
     const querySnapshot = await getDocs(queryForConcert);
     return querySnapshot.docs.map((currentDoc) => currentDoc.data() as ConcertProperty);
   } catch (e) {
