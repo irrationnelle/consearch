@@ -18,7 +18,11 @@ const ReadConcerts = (): ReactElement => {
 
   return (
     <div data-testid="read-concerts">
-      <div>
+      <form onSubmit={(event) => {
+        event.preventDefault();
+        setCurrentTitle(title);
+      }}
+      >
         <label htmlFor="title-search">
           title-search
           <input
@@ -30,16 +34,13 @@ const ReadConcerts = (): ReactElement => {
           />
         </label>
         <button
-          type="button"
-          onClick={() => {
-            setCurrentTitle(title);
-          }}
+          type="submit"
         >
           search
         </button>
-      </div>
+      </form>
       <div role="list">
-        {currentConcerts?.map((concert) => (
+        {currentConcerts?.map((concert: ConcertProperty) => (
           <div key={concert.title} role="listitem">
             <span>{concert.title}</span>
             <span>{concert.artist}</span>
