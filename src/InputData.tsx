@@ -10,6 +10,7 @@ export interface ConcertProperty {
   address: string;
   genre: string;
   date: string;
+  price: number;
   coverImage?: string;
 }
 
@@ -27,6 +28,7 @@ const InputData: FC = (): ReactElement => {
   const [address, setAddress] = useState<string>('');
   const [stage, setStage] = useState<string>('');
   const [date, setDate] = useState<string>('');
+  const [price, setPrice] = useState<number>(-1);
 
   return (
     <div>
@@ -91,14 +93,30 @@ const InputData: FC = (): ReactElement => {
             }}
           />
         </label>
+        <label htmlFor="price-input">
+          price-input
+          <input
+            id="price-input"
+            type="number"
+            value={price}
+            onChange={({ target: { value } }) => {
+              const regex = /^\d*$/;
+              const isNumerical = regex.test(value);
+              if (isNumerical) {
+                const priceNumber = parseInt(value, 10);
+                setPrice(priceNumber);
+              }
+            }}
+          />
+        </label>
       </Contents>
       <div>
         <button
           type="button"
-          disabled={!(title && artist && genre && stage && address && date)}
+          disabled={!(title && artist && genre && stage && address && date && (price > 0))}
           onClick={() => {
             mutation.mutate({
-              title, artist, genre, stage, address, date,
+              title, artist, genre, stage, address, date, price,
             });
             setTitle('');
             setArtist('');
@@ -120,6 +138,7 @@ const InputData: FC = (): ReactElement => {
           <span aria-label="date">{mutation.data?.date}</span>
           <span aria-label="address">{mutation.data?.address}</span>
           <span aria-label="stage">{mutation.data?.stage}</span>
+          <span aria-label="price">{mutation.data?.price}</span>
         </Contents>
         )}
     </div>

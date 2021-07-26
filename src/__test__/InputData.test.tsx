@@ -13,6 +13,7 @@ const EXAMPLE_DATA = {
   address: '서울 마포구 어울마당로 35',
   genre: 'rockmetal',
   date: '2021-06-26-20:00',
+  price: 10000,
   coverImage: '',
 };
 
@@ -28,6 +29,7 @@ describe('데이터 입력 화면 테스트에서,', () => {
     inputTextByLabel('stage-input', EXAMPLE_DATA.stage);
     inputTextByLabel('address-input', EXAMPLE_DATA.address);
     inputTextByLabel('genre-input', EXAMPLE_DATA.genre);
+    inputTextByLabel('date-input', EXAMPLE_DATA.date);
 
     // then
     const submitButton = screen.getByRole('button');
@@ -42,6 +44,7 @@ describe('데이터 입력 화면 테스트에서,', () => {
     inputTextByLabel('address-input', EXAMPLE_DATA.address);
     inputTextByLabel('genre-input', EXAMPLE_DATA.genre);
     inputTextByLabel('date-input', EXAMPLE_DATA.date);
+    inputTextByLabel('price-input', EXAMPLE_DATA.price);
 
     // when
     const submitButton = screen.getByRole('button');
@@ -59,6 +62,7 @@ describe('데이터 입력 화면 테스트에서,', () => {
       expect(screen.getByLabelText('stage-input').textContent).toMatch('');
       expect(screen.getByLabelText('address-input').textContent).toMatch('');
       expect(screen.getByLabelText('date-input').textContent).toMatch('');
+      expect(screen.getByLabelText('price-input').textContent).toBe(-1);
 
       expect(screen.getByLabelText('title').textContent).toMatch(EXAMPLE_DATA.title);
       expect(screen.getByLabelText('artist').textContent).toMatch(EXAMPLE_DATA.artist);
@@ -66,6 +70,7 @@ describe('데이터 입력 화면 테스트에서,', () => {
       expect(screen.getByLabelText('stage').textContent).toMatch(EXAMPLE_DATA.stage);
       expect(screen.getByLabelText('address').textContent).toMatch(EXAMPLE_DATA.address);
       expect(screen.getByLabelText('date').textContent).toMatch(EXAMPLE_DATA.date);
+      expect(screen.getByLabelText('price').textContent).toBe(EXAMPLE_DATA.price);
     }, { timeout: 60 * 1000 });
   });
 });

@@ -42,6 +42,7 @@ const createConcert = async (newConcert: ConcertProperty): Promise<ConcertProper
       address: '에러',
       genre: '에러',
       date: '에러',
+      price: -1,
     };
   }
 };
