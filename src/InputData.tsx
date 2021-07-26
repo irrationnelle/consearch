@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { createConcert } from './api/concert';
 
 export interface ConcertProperty {
+    id?: string;
   title: string;
   artist: string;
   stage: string;

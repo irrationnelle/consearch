@@ -51,7 +51,14 @@ const readConcertApi = async (): Promise<ConcertProperty[]> => {
   try {
     const db = getFirestore();
     const querySnapshot = await getDocs(collection(db, 'concerts'));
-    return querySnapshot.docs.map((currentDoc) => currentDoc.data() as ConcertProperty);
+    return querySnapshot.docs.map((currentDoc) => {
+      const data = currentDoc.data();
+      const result = {
+        ...data,
+        id: currentDoc.id,
+      };
+      return result as ConcertProperty;
+    });
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);
@@ -73,7 +80,14 @@ const readSingleConcertApiByTitle = async (title: string): Promise<ConcertProper
     const firestoreDatabase = getFirestore();
     const queryForConcert = await query(collection(firestoreDatabase, 'concerts'), where(documentId(), 'in', concertObjectIds));
     const querySnapshot = await getDocs(queryForConcert);
-    return querySnapshot.docs.map((currentDoc) => currentDoc.data() as ConcertProperty);
+    return querySnapshot.docs.map((currentDoc) => {
+      const data = currentDoc.data();
+      const result = {
+        ...data,
+        id: currentDoc.id,
+      };
+      return result as ConcertProperty;
+    });
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);
