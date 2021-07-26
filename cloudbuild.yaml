@@ -13,6 +13,12 @@ steps:
          'REACT_APP_FIREBASE_PROJECT_ID=${_REACT_APP_FIREBASE_PROJECT_ID}',
          '--build-arg',
          'REACT_APP_FIREBASE_STORAGE_BUCKET=${_REACT_APP_FIREBASE_STORAGE_BUCKET}',
+         '--build-arg',
+         'REACT_APP_ALGOLIA_APP_ID=${_REACT_APP_ALGOLIA_APP_ID}',
+         '--build-arg',
+         'REACT_APP_ALGOLIA_API_KEY=${_REACT_APP_ALGOLIA_API_KEY}',
+         '--build-arg',
+         'REACT_APP_ALGOLIA_INDEX=${_REACT_APP_ALGOLIA_INDEX}',
          '-t',
          'gcr.io/$PROJECT_ID/cra-cloud-run',
          '.']
