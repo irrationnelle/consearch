@@ -28,13 +28,13 @@ const App: FC = (): ReactElement => (
                 <Link to="/input-concert">concert-input</Link>
               </div>
               <div>
-                <Link to="/search-concert">concert-search</Link>
+                <Link to="/search-concert">concerts</Link>
               </div>
               <div>
                 <Link to="/input-artist">artist-input</Link>
               </div>
               <div>
-                <Link to="/search-artist">artist-search</Link>
+                <Link to="/search-artist">artists</Link>
               </div>
             </HeaderNav>
 
@@ -72,7 +72,7 @@ const Wrapper = styled.div`
 `;
 
 const AppWrapper = styled.div`
-    width: 50%;
+    width: 100%;
     height: 98%;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
