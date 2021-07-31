@@ -31,7 +31,17 @@ const retrieveConcert = async (id: number): Promise<RawConcert> => {
 const createConcert = async (newConcert: ConcertProperty): Promise<ConcertProperty> => {
   try {
     const db = getFirestore();
-    await addDoc(collection(db, 'concerts'), newConcert);
+    const docRef = await addDoc(collection(db, 'concerts'), newConcert);
+    if (newConcert.artists.length > 0) {
+      for (const artistToUpdate of newConcert.artists) {
+        if (artistToUpdate) {
+          const updateDocRef = doc(db, 'artists', artistToUpdate);
+          updateDoc(updateDocRef, {
+            concerts: arrayUnion(docRef.id),
+          });
+        }
+      }
+    }
     return newConcert;
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -39,6 +49,7 @@ const createConcert = async (newConcert: ConcertProperty): Promise<ConcertProper
     return {
       title: '에러',
       artist: '에러',
+      artists: ['에러'],
       stage: '에러',
       address: '에러',
       genre: '에러',

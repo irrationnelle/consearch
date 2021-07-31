@@ -139,7 +139,7 @@ const ArtistInputData: FC = (): ReactElement => {
             border: '1px solid lightskyblue', borderRadius: '4px', display: 'flex', flexDirection: 'column',
           }}
           >
-            <span style={{ fontWeight: 'bolder' }}>추가 예정 공연</span>
+            <span style={{ fontWeight: 'bolder' }}>추가할 공연</span>
             <div>
               {registeredConcerts.map((concert) => (
                 <div key={concert.id} style={{ display: 'flex' }}>

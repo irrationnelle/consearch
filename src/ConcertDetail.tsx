@@ -26,8 +26,19 @@ const ConcertDetail: FC<ConcertDetailProps> = ({ concerts: currentConcerts }: Co
       </button>
       <span>{detailData?.title}</span>
       <span>{detailData?.artist}</span>
+      {detailData?.artists && detailData?.artists.length > 0 && (
+      <div style={{
+        border: '1px solid coral', borderRadius: '4px', display: 'flex', flexDirection: 'column',
+      }}
+      >
+        <span style={{ fontWeight: 'bolder' }}>Artist List</span>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {detailData.artists.map((item) => <span key={item}>{item}</span>)}
+        </div>
+      </div>
+      )}
       <a href={`https://map.kakao.com/link/map/${addressPosition.y},${addressPosition.x}`}>{detailData?.address}</a>
-      <ConcertLocationMap address={detailData?.address ?? '서울시 마포구 어울마당로 35'} setPos={setAddressPosition} />
+      <ConcertLocationMap address={detailData?.address ?? ''} setPos={setAddressPosition} />
       <span>{detailData?.date}</span>
       <span>{detailData?.genre}</span>
       <span>{detailData?.price}</span>
