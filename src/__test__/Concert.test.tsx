@@ -1,5 +1,5 @@
 import React from 'react';
-import ConcertList from '../ConcertList';
+import LegacyConcertList from '../LegacyConcertList';
 import { render, fireEvent } from '../helpers/test-utils';
 
 import { RawConcert } from '../@models/concert';
@@ -12,7 +12,7 @@ describe('concert', () => {
       concerts: mockConcerts,
       inputedGenres: [],
     };
-    const { container, getByText } = render(<ConcertList />, {
+    const { container, getByText } = render(<LegacyConcertList />, {
       initialState,
     });
 

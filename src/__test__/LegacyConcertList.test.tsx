@@ -1,6 +1,6 @@
 import React from 'react';
 import { format, parseISO } from 'date-fns';
-import ConcertList from '../ConcertList';
+import LegacyConcertList from '../LegacyConcertList';
 import { render, fireEvent } from '../helpers/test-utils';
 
 import { mockConcerts } from '../__mock__/data';
@@ -14,7 +14,7 @@ describe('concert list', () => {
       inputedGenres: [],
     };
 
-    const { container, getByText } = render(<ConcertList />, {
+    const { container, getByText } = render(<LegacyConcertList />, {
       initialState,
     });
 
@@ -35,7 +35,7 @@ describe('concert list', () => {
     };
 
     // when
-    const { container } = render(<ConcertList />, {
+    const { container } = render(<LegacyConcertList />, {
       initialState,
     });
 
@@ -59,7 +59,7 @@ describe('concert list', () => {
       concerts: mockConcerts,
       inputedGenres: [],
     };
-    const { container, getByLabelText } = render(<ConcertList />, {
+    const { container, getByLabelText } = render(<LegacyConcertList />, {
       initialState,
     });
 
@@ -81,7 +81,7 @@ describe('concert list', () => {
       concerts: mockConcerts,
       inputedGenres: [],
     };
-    const { container, getByTestId, getByLabelText } = render(<ConcertList />, {
+    const { container, getByTestId, getByLabelText } = render(<LegacyConcertList />, {
       initialState,
     });
 
@@ -104,7 +104,7 @@ describe('concert list', () => {
       concerts: mockConcerts,
       inputedGenres: [],
     };
-    const { container, getByTestId, getByLabelText } = render(<ConcertList />, {
+    const { container, getByTestId, getByLabelText } = render(<LegacyConcertList />, {
       initialState,
     });
 
@@ -132,7 +132,7 @@ describe('concert list', () => {
       concerts: mockConcerts,
       inputedGenres: [],
     };
-    const { container, getByTestId, getByLabelText } = render(<ConcertList />, {
+    const { container, getByTestId, getByLabelText } = render(<LegacyConcertList />, {
       initialState,
     });
 
@@ -159,7 +159,7 @@ describe('concert list', () => {
       concerts: mockConcerts,
       inputedGenres: [],
     };
-    const { container, getByTestId, getByLabelText } = render(<ConcertList />, {
+    const { container, getByTestId, getByLabelText } = render(<LegacyConcertList />, {
       initialState,
     });
 
