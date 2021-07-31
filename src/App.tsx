@@ -21,20 +21,35 @@ const App: FC = (): ReactElement => (
         <InitializationProvider>
           <AppWrapper>
             <HeaderNav>
-              <div>
+              <div style={{
+                border: '0.5px solid lightgray', borderRadius: '2px', background: 'white', padding: '0.5px',
+              }}
+              >
                 <Link to="/">Main</Link>
               </div>
-              <div>
-                <Link to="/input-concert">concert-input</Link>
+              <div style={{
+                border: '0.5px solid lightgray', borderRadius: '2px', background: 'white', padding: '0.5px',
+              }}
+              >
+                <Link to="/input-concert">공연+</Link>
               </div>
-              <div>
-                <Link to="/search-concert">concerts</Link>
+              <div style={{
+                border: '0.5px solid lightgray', borderRadius: '2px', background: 'white', padding: '0.5px',
+              }}
+              >
+                <Link to="/search-concert">공연</Link>
               </div>
-              <div>
-                <Link to="/input-artist">artist-input</Link>
+              <div style={{
+                border: '0.5px solid lightgray', borderRadius: '2px', background: 'white', padding: '0.5px',
+              }}
+              >
+                <Link to="/input-artist">뮤지션+</Link>
               </div>
-              <div>
-                <Link to="/search-artist">artists</Link>
+              <div style={{
+                border: '0.5px solid lightgray', borderRadius: '2px', background: 'white', padding: '0.5px',
+              }}
+              >
+                <Link to="/search-artist">뮤지션</Link>
               </div>
             </HeaderNav>
 

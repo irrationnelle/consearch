@@ -25,7 +25,7 @@ const AvailableArtists: FC<AvailableArtistsProps> = ({ artistIds }: AvailableArt
     }}
     >
       <span style={{ fontWeight: 'bolder', marginLeft: '5px' }}>Artist List</span>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex' }}>
         {artists?.map((artist) => (
           <button
             type="button"
@@ -35,10 +35,10 @@ const AvailableArtists: FC<AvailableArtistsProps> = ({ artistIds }: AvailableArt
             }}
             style={{
               marginLeft: '5px',
+              marginRight: '5px',
               border: '1px solid lightskyblue',
               borderRadius: '4px',
               background: 'white',
-              width: '20%',
             }}
           >
             {artist.name}
@@ -67,7 +67,13 @@ const ConcertDetail: FC<ConcertDetailProps> = ({ concerts: currentConcerts }: Co
       flexDirection: 'column',
     }}
     >
-      <button type="button" onClick={() => { history.goBack(); }} style={{ width: '10%' }}>
+      <button
+        type="button"
+        onClick={() => { history.goBack(); }}
+        style={{
+          width: '50px', borderRadius: '4px', border: '1px solid lightgray', background: 'white',
+        }}
+      >
         back
       </button>
       <span>{detailData?.title}</span>

@@ -22,7 +22,7 @@ const AvailableConcerts: FC<AvailableConcertsProps> = ({ concertIds }: Available
     }}
     >
       <span style={{ fontWeight: 'bolder', marginLeft: '5px' }}>Artist List</span>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex' }}>
         {concerts?.map((concert) => (
           <button
             type="button"
@@ -32,10 +32,10 @@ const AvailableConcerts: FC<AvailableConcertsProps> = ({ concertIds }: Available
             }}
             style={{
               marginLeft: '5px',
+              marginRight: '5px',
               border: '1px solid lightskyblue',
               borderRadius: '4px',
               background: 'white',
-              width: '20%',
             }}
           >
             {concert.title}
@@ -62,7 +62,13 @@ const ArtistDetail: FC<ArtistDetailProps> = ({ artists }: ArtistDetailProps): Re
       flexDirection: 'column',
     }}
     >
-      <button type="button" onClick={() => { history.goBack(); }} style={{ width: '10%' }}>
+      <button
+        type="button"
+        onClick={() => { history.goBack(); }}
+        style={{
+          width: '50px', borderRadius: '4px', border: '1px solid lightgray', background: 'white',
+        }}
+      >
         back
       </button>
       <span>{detailData?.name}</span>
