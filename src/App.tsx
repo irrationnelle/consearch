@@ -25,14 +25,10 @@ const App: FC = (): ReactElement => (
                 <Link to="/">Main</Link>
               </div>
               <div>
-                <Link to="/concerts">Concerts</Link>
-              </div>
-              <div>Artists</div>
-              <div>
-                <Link to="/input">input</Link>
+                <Link to="/input-concert">concert-input</Link>
               </div>
               <div>
-                <Link to="/search">read</Link>
+                <Link to="/search-concert">concert-search</Link>
               </div>
               <div>
                 <Link to="/input-artist">artist-input</Link>
@@ -46,10 +42,10 @@ const App: FC = (): ReactElement => (
               <Route path="/concerts">
                 <LegacyConcertList />
               </Route>
-              <Route path="/input">
+              <Route path="/input-concert">
                 <InputData />
               </Route>
-              <Route path="/search">
+              <Route path="/search-concert">
                 <ConcertSearch />
               </Route>
               <Route path="/input-artist">

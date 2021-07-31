@@ -34,7 +34,7 @@ const ConcertSearch = (): ReactElement => {
     >
       <form onSubmit={(event) => {
         event.preventDefault();
-        history.push('/read');
+        history.push('/search-concert');
         setCurrentTitle(title);
       }}
       >
