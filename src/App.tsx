@@ -5,10 +5,10 @@ import {
 } from 'react-router-dom';
 import styled from 'styled-components';
 
-import ConcertList from './ConcertList';
+import LegacyConcertList from './LegacyConcertList';
 import InputData from './InputData';
 import InitializationProvider from './contexts/InitializationContext';
-import ReadConcerts from './ReadConcerts';
+import ConcertSearch from './ConcertSearch';
 
 const queryClient = new QueryClient();
 
@@ -30,19 +30,19 @@ const App: FC = (): ReactElement => (
                 <Link to="/input">input</Link>
               </div>
               <div>
-                <Link to="/read">read</Link>
+                <Link to="/search">read</Link>
               </div>
             </HeaderNav>
 
             <Switch>
               <Route path="/concerts">
-                <ConcertList />
+                <LegacyConcertList />
               </Route>
               <Route path="/input">
                 <InputData />
               </Route>
-              <Route path="/read">
-                <ReadConcerts />
+              <Route path="/search">
+                <ConcertSearch />
               </Route>
             </Switch>
           </AppWrapper>
