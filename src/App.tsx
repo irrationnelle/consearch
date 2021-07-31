@@ -9,6 +9,7 @@ import LegacyConcertList from './LegacyConcertList';
 import InputData from './InputData';
 import InitializationProvider from './contexts/InitializationContext';
 import ConcertSearch from './ConcertSearch';
+import ArtistInputData from './ArtistInputData';
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,9 @@ const App: FC = (): ReactElement => (
               <div>
                 <Link to="/search">read</Link>
               </div>
+              <div>
+                <Link to="/input-artist">artist-input</Link>
+              </div>
             </HeaderNav>
 
             <Switch>
@@ -43,6 +47,9 @@ const App: FC = (): ReactElement => (
               </Route>
               <Route path="/search">
                 <ConcertSearch />
+              </Route>
+              <Route path="/input-artist">
+                <ArtistInputData />
               </Route>
             </Switch>
           </AppWrapper>
