@@ -2,7 +2,7 @@ import React, { FC, ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import { useMutation } from 'react-query';
 import { useReadConcertByTitle } from './ConcertSearch';
-import { ConcertProperty } from './InputData';
+import { ConcertProperty } from './ConcertInputData';
 import { createArtist } from './api/concert';
 
 const Contents = styled.div`
@@ -71,7 +71,7 @@ const ArtistInputData: FC = (): ReactElement => {
           />
         </label>
         <div style={{
-          border: '1px solid coral', width: '100%', height: '50%', display: 'flex', flexDirection: 'column',
+          border: '1px solid lightgray', width: '100%', height: '50%', display: 'flex', flexDirection: 'column',
         }}
         >
           <form onSubmit={(event) => {
@@ -136,7 +136,7 @@ const ArtistInputData: FC = (): ReactElement => {
             </button>
           </div>
           <div style={{
-            border: '1px solid lightskyblue', borderRadius: '4px', display: 'flex', flexDirection: 'column',
+            border: '1px solid coral', borderRadius: '4px', display: 'flex', flexDirection: 'column',
           }}
           >
             <span style={{ fontWeight: 'bolder' }}>추가할 공연</span>

@@ -5,7 +5,7 @@ import {
 import algoliasearch from 'algoliasearch';
 import { RawConcert } from '../@models/concert';
 import { mockConcerts } from '../__mock__/data';
-import { ConcertProperty } from '../InputData';
+import { ConcertProperty } from '../ConcertInputData';
 import { ArtistProperty } from '../ArtistInputData';
 
 const { REACT_APP_DOMAIN_API_URL } = process.env;

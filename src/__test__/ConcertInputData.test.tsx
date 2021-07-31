@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { act, waitFor } from '@testing-library/react';
 import { renderWithProviders, screen } from '../helpers/test-utils';
 
-import InputData from '../InputData';
+import ConcertInputData from '../ConcertInputData';
 import inputTextByLabel from './helper/inputTextByLabel';
 
 const EXAMPLE_DATA = {
@@ -18,7 +18,7 @@ const EXAMPLE_DATA = {
 
 describe('데이터 입력 화면 테스트에서,', () => {
   beforeEach(() => {
-    renderWithProviders(<InputData />);
+    renderWithProviders(<ConcertInputData />);
   });
 
   it('필수 입력 데이터를 모두 입력하지 않으면 전송 버튼을 disabled 처리한다.', () => {
@@ -30,7 +30,7 @@ describe('데이터 입력 화면 테스트에서,', () => {
     inputTextByLabel('date-input', EXAMPLE_DATA.date);
 
     // then
-    const submitButton = screen.getByText('Submit');
+    const submitButton = screen.getByText('submit');
     expect(submitButton).toHaveAttribute('disabled');
   });
 
@@ -44,7 +44,7 @@ describe('데이터 입력 화면 테스트에서,', () => {
     inputTextByLabel('price-input', EXAMPLE_DATA.price);
 
     // when
-    const submitButton = screen.getByText('Submit');
+    const submitButton = screen.getByText('submit');
     expect(submitButton).not.toHaveAttribute('disabled');
 
     act(() => {

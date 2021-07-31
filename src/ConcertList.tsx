@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { ConcertProperty } from './InputData';
+import { ConcertProperty } from './ConcertInputData';
 
 interface ConcertListProps {
     concerts?: ConcertProperty[];

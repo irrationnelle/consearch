@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { ConcertProperty } from './InputData';
+import { ConcertProperty } from './ConcertInputData';
 import ConcertLocationMap from './ConcertLocationMap';
 import { readArtistsByIds } from './api/concert';
 

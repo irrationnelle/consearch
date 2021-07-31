@@ -22,7 +22,7 @@ const Contents = styled.div`
     flex-direction: column;
 `;
 
-const InputData: FC = (): ReactElement => {
+const ConcertInputData: FC = (): ReactElement => {
   const mutation = useMutation(createConcert);
 
   const [title, setTitle] = useState<string>('');
@@ -54,7 +54,7 @@ const InputData: FC = (): ReactElement => {
           />
         </label>
         <div style={{
-          border: '1px solid coral', width: '100%', height: '50%', display: 'flex', flexDirection: 'column',
+          border: '1px solid lightgray', width: '100%', height: '50%', display: 'flex', flexDirection: 'column',
         }}
         >
           <form onSubmit={(event) => {
@@ -120,7 +120,7 @@ const InputData: FC = (): ReactElement => {
             </button>
           </div>
           <div style={{
-            border: '1px solid lightskyblue', borderRadius: '4px', display: 'flex', flexDirection: 'column',
+            border: '1px solid coral', borderRadius: '4px', display: 'flex', flexDirection: 'column',
           }}
           >
             <span style={{ fontWeight: 'bolder' }}>추가할 아티스트</span>
@@ -213,8 +213,18 @@ const InputData: FC = (): ReactElement => {
             setGenre('');
             setStage('');
           }}
+          style={{
+            marginTop: '5px',
+            height: '20px',
+            width: '20%',
+            borderRadius: '4px',
+            border: '1px solid coral',
+            background: 'white',
+            fontSize: '12px',
+          }}
+
         >
-          Submit
+          submit
         </button>
       </div>
       {mutation.isSuccess
@@ -232,4 +242,4 @@ const InputData: FC = (): ReactElement => {
   );
 };
 
-export default InputData;
+export default ConcertInputData;

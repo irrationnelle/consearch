@@ -4,7 +4,7 @@ import {
   Route, useHistory, useRouteMatch,
 } from 'react-router-dom';
 import { readConcertApi, readSingleConcertApiByTitle } from './api/concert';
-import { ConcertProperty } from './InputData';
+import { ConcertProperty } from './ConcertInputData';
 import ConcertList from './ConcertList';
 import ConcertDetail from './ConcertDetail';
 

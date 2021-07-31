@@ -6,7 +6,7 @@ import {
 import styled from 'styled-components';
 
 import LegacyConcertList from './LegacyConcertList';
-import InputData from './InputData';
+import ConcertInputData from './ConcertInputData';
 import InitializationProvider from './contexts/InitializationContext';
 import ConcertSearch from './ConcertSearch';
 import ArtistInputData from './ArtistInputData';
@@ -43,7 +43,7 @@ const App: FC = (): ReactElement => (
                 <LegacyConcertList />
               </Route>
               <Route path="/input-concert">
-                <InputData />
+                <ConcertInputData />
               </Route>
               <Route path="/search-concert">
                 <ConcertSearch />
