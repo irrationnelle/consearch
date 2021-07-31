@@ -13,12 +13,18 @@ const ConcertList: FC<ConcertListProps> = ({ concerts: currentConcerts }: Concer
     <div data-testid="concert-list">
       <div role="list">
         {currentConcerts?.map((concert: ConcertProperty) => (
-          <div key={concert.title} role="listitem">
-            <Link to={`${url}/${concert.id ?? concert.title}`}>{concert.title}</Link>
-            <span>{concert.genre}</span>
-            <span>{concert.address}</span>
-            <span>{concert.date}</span>
-            <span>{concert.stage}</span>
+          <div
+            key={concert.title}
+            role="listitem"
+            style={{
+              display: 'flex', border: '1px solid lightgray', background: 'white', marginTop: '8px', marginBottom: '8px', borderRadius: '4px',
+            }}
+          >
+            <div style={{ marginLeft: '8px' }}>
+              <Link to={`${url}/${concert.id ?? concert.title}`}>{concert.title}</Link>
+            </div>
+            <span style={{ marginLeft: '8px' }}>{concert.genre}</span>
+            <span style={{ marginLeft: '8px' }}>{concert.stage}</span>
           </div>
         ))}
       </div>
