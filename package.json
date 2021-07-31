@@ -59,6 +59,7 @@
         ],
         "rules": {
             "no-redeclare": "off",
+            "max-len": "off",
             "@typescript-eslint/no-redeclare": [
                 "error"
             ],

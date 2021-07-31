@@ -2,8 +2,8 @@ import React from 'react';
 import { waitFor, fireEvent } from '@testing-library/react';
 import { renderWithProviders, screen } from '../helpers/test-utils';
 import * as api from '../api/concert';
-import ReadConcerts from '../ReadConcerts';
 import inputTextByLabel from './helper/inputTextByLabel';
+import ConcertSearch from '../ConcertSearch';
 
 export const EXAMPLE_DATA = {
   title: '마스토돈',
@@ -12,6 +12,7 @@ export const EXAMPLE_DATA = {
   address: '서울 마포구 어울마당로 35',
   genre: 'rockmetal',
   date: '2021-06-26-20:00',
+  price: 10000,
   coverImage: '',
 };
 
@@ -22,6 +23,7 @@ const SECOND_EXAMPLE_DATA = {
   address: '서울 마포구 어울마당로 37',
   genre: '인디락',
   date: '2021-07-20-20:00',
+  price: 30000,
   coverImage: '',
 };
 
@@ -32,13 +34,14 @@ export const THIRD_EXAMPLE_DATA = {
   address: '서울 마포구 어울마당로 38',
   genre: 'rockmetal',
   date: '2021-07-22-21:00',
+  price: 20000,
   coverImage: '',
 };
 
 describe('ReadConcerts 에서는,', () => {
   beforeEach(() => {
     renderWithProviders(
-      <ReadConcerts />,
+      <ConcertSearch />,
     );
   });
 
@@ -47,7 +50,7 @@ describe('ReadConcerts 에서는,', () => {
   });
 
   it('해당 컴포넌트가 존재한다.', () => {
-    const span = screen.getByTestId('read-concerts');
+    const span = screen.getByTestId('concert-search');
     expect(span).toBeInTheDocument();
   });
 

@@ -33,11 +33,13 @@ const renderWithProviders = (
   renderOptions: Omit<RenderOptions, 'queries'> = {},
 ): RenderResult => {
   const Wrapper = ({ children }: {children: React.ReactNode}) => (
-    <QueryClientProvider client={queryClient}>
-      <InitializationProvider>
-        {children}
-      </InitializationProvider>
-    </QueryClientProvider>
+    <MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <InitializationProvider>
+          {children}
+        </InitializationProvider>
+      </QueryClientProvider>
+    </MemoryRouter>
   );
   return rtlRender(ui, { wrapper: Wrapper as React.ComponentType, ...renderOptions });
 };

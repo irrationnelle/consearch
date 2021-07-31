@@ -1,13 +1,20 @@
 import React, { ReactElement, useState } from 'react';
 import { useQuery } from 'react-query';
-import { Link, Route, useRouteMatch } from 'react-router-dom';
+import {
+  Route, useHistory, useRouteMatch,
+} from 'react-router-dom';
 import { readConcertApi, readSingleConcertApiByTitle } from './api/concert';
 import { ConcertProperty } from './InputData';
+import ConcertList from './ConcertList';
+import ConcertDetail from './ConcertDetail';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useReadConcertByTitle = (title: string) => useQuery(['title', title], () => readSingleConcertApiByTitle(title));
 
-const ReadConcerts = (): ReactElement => {
+const ConcertSearch = (): ReactElement => {
+  const { path } = useRouteMatch();
+  const history = useHistory();
+
   const { data: concerts } = useQuery<ConcertProperty[]>('readConcerts', readConcertApi);
 
   const [title, setTitle] = useState<string>('');
@@ -17,12 +24,17 @@ const ReadConcerts = (): ReactElement => {
 
   const currentConcerts = searchedConcerts?.length === 0 ? concerts : searchedConcerts;
 
-  const { url } = useRouteMatch();
-
   return (
-    <div data-testid="read-concerts">
+    <div
+      data-testid="concert-search"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <form onSubmit={(event) => {
         event.preventDefault();
+        history.push('/read');
         setCurrentTitle(title);
       }}
       >
@@ -42,37 +54,10 @@ const ReadConcerts = (): ReactElement => {
           search
         </button>
       </form>
-      <div role="list">
-        {currentConcerts?.map((concert: ConcertProperty) => (
-          <div key={concert.title} role="listitem">
-            <Link to={`${url}/${concert.id ?? concert.title}`}>{concert.title}</Link>
-            <span>{concert.artist}</span>
-            <span>{concert.genre}</span>
-            <span>{concert.address}</span>
-            <span>{concert.date}</span>
-            <span>{concert.stage}</span>
-          </div>
-        ))}
-      </div>
+      <Route exact path={path} render={() => <ConcertList concerts={currentConcerts} />} />
+      <Route path={`${path}/:concertId`} render={() => <ConcertDetail concerts={currentConcerts} />} />
     </div>
   );
 };
 
-const ReadConcert = (): ReactElement => (
-  <div>
-    <span>hello</span>
-  </div>
-);
-
-const ReadConcertRouter = (): ReactElement => {
-  const { path } = useRouteMatch();
-
-  return (
-    <>
-      <Route exact path={path} component={ReadConcerts} />
-      <Route path={`${path}/:concertId`} component={ReadConcert} />
-    </>
-  );
-};
-
-export default ReadConcertRouter;
+export default ConcertSearch;
