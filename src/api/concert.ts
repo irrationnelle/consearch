@@ -1,11 +1,12 @@
 import axios from 'axios';
 import {
-  addDoc, collection, getFirestore, getDocs, where, query, documentId,
+  addDoc, collection, getFirestore, getDocs, where, query, documentId, updateDoc, arrayUnion, doc,
 } from 'firebase/firestore';
 import algoliasearch from 'algoliasearch';
 import { RawConcert } from '../@models/concert';
 import { mockConcerts } from '../__mock__/data';
 import { ConcertProperty } from '../InputData';
+import { ArtistProperty } from '../ArtistInputData';
 
 const { REACT_APP_DOMAIN_API_URL } = process.env;
 
@@ -95,6 +96,33 @@ const readSingleConcertApiByTitle = async (title: string): Promise<ConcertProper
   }
 };
 
+const createArtist = async (newArtist: ArtistProperty): Promise<ArtistProperty> => {
+  try {
+    const db = getFirestore();
+    const docRef = await addDoc(collection(db, 'artists'), newArtist);
+    if (newArtist.concerts.length > 0) {
+      for (const concertToUpdate of newArtist.concerts) {
+        if (concertToUpdate) {
+          const updateDocRef = doc(db, 'concerts', concertToUpdate);
+          updateDoc(updateDocRef, {
+            artists: arrayUnion(docRef.id),
+          });
+        }
+      }
+    }
+    return newArtist;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+    return {
+      name: 'error',
+      genre: 'error',
+      description: 'error',
+      concerts: ['eroror'],
+    };
+  }
+};
+
 export {
-  retrieveConcerts, retrieveConcert, createConcert, readConcertApi, readSingleConcertApiByTitle,
+  retrieveConcerts, retrieveConcert, createConcert, readConcertApi, readSingleConcertApiByTitle, createArtist,
 };
