@@ -97,7 +97,7 @@ const readSingleConcertApiByTitle = async (title: string): Promise<ConcertProper
   }
 };
 
-const readConcertsByIds = async (concertIds: string[]): Promise<ConcertProperty[]> => {
+const readConcertsByIds = async (concertIds: (string | undefined)[]): Promise<ConcertProperty[]> => {
   try {
     const concertObjectIds = concertIds;
     const firestoreDatabase = getFirestore();

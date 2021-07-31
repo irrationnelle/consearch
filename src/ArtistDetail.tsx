@@ -1,6 +1,50 @@
 import React, { FC, ReactElement } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import { ArtistProperty } from './ArtistInputData';
+import { readConcertsByIds } from './api/concert';
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const useGetConcertsByIds = (concertIds: (string | undefined)[]) => useQuery(['concert_ids', concertIds], () => readConcertsByIds(concertIds));
+
+interface AvailableConcertsProps {
+  concertIds: (string | undefined)[];
+}
+
+const AvailableConcerts: FC<AvailableConcertsProps> = ({ concertIds }: AvailableConcertsProps) => {
+  const { data: concerts } = useGetConcertsByIds(concertIds);
+
+  const { push } = useHistory();
+
+  return (
+    <div style={{
+      border: '1px solid lightgray', borderRadius: '4px', display: 'flex', flexDirection: 'column',
+    }}
+    >
+      <span style={{ fontWeight: 'bolder', marginLeft: '5px' }}>Artist List</span>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {concerts?.map((concert) => (
+          <button
+            type="button"
+            key={concert.id}
+            onClick={() => {
+              push(`/search-concert/${concert.id}`);
+            }}
+            style={{
+              marginLeft: '5px',
+              border: '1px solid lightskyblue',
+              borderRadius: '4px',
+              background: 'white',
+              width: '20%',
+            }}
+          >
+            {concert.title}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 interface ArtistDetailProps {
     artists?: ArtistProperty[];
@@ -24,14 +68,7 @@ const ArtistDetail: FC<ArtistDetailProps> = ({ artists }: ArtistDetailProps): Re
       <span>{detailData?.name}</span>
       <span>{detailData?.genre}</span>
       <span>{detailData?.description}</span>
-      {detailData?.concerts && detailData?.concerts.length > 0 && (
-      <div style={{
-        border: '1px solid coral', borderRadius: '4px', display: 'flex', flexDirection: 'column',
-      }}
-      >
-        {detailData.concerts.map((item) => <span key={item}>{item}</span>)}
-      </div>
-      )}
+      {detailData?.concerts && detailData?.concerts.length > 0 && <AvailableConcerts concertIds={detailData.concerts} />}
     </div>
   );
 };
