@@ -89,6 +89,17 @@ const readSingleConcertApiByTitle = async (title: string): Promise<ConcertProper
     const { hits: searchResults } = await algoliaIndex.search(title);
     if (searchResults.length <= 0) return [];
     const concertObjectIds = searchResults.map((searchResult) => searchResult.objectID);
+    return readConcertsByIds(concertObjectIds);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+    return [];
+  }
+};
+
+const readConcertsByIds = async (concertIds: string[]): Promise<ConcertProperty[]> => {
+  try {
+    const concertObjectIds = concertIds;
     const firestoreDatabase = getFirestore();
     const queryForConcert = await query(collection(firestoreDatabase, 'concerts'), where(documentId(), 'in', concertObjectIds));
     const querySnapshot = await getDocs(queryForConcert);
@@ -143,17 +154,7 @@ const readArtistsApiBySearch = async (artistOption: string): Promise<ArtistPrope
     const { hits: searchResults } = await algoliaIndex.search(artistOption);
     if (searchResults.length <= 0) return [];
     const concertObjectIds = searchResults.map((searchResult) => searchResult.objectID);
-    const firestoreDatabase = getFirestore();
-    const queryForConcert = await query(collection(firestoreDatabase, 'artists'), where(documentId(), 'in', concertObjectIds));
-    const querySnapshot = await getDocs(queryForConcert);
-    return querySnapshot.docs.map((currentDoc) => {
-      const data = currentDoc.data();
-      const result = {
-        ...data,
-        id: currentDoc.id,
-      };
-      return result as ArtistProperty;
-    });
+    return readArtistsByIds(concertObjectIds);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);
@@ -161,6 +162,21 @@ const readArtistsApiBySearch = async (artistOption: string): Promise<ArtistPrope
   }
 };
 
+const readArtistsByIds = async (artistIds: (string | undefined)[]): Promise<ArtistProperty[]> => {
+  const concertObjectIds = artistIds;
+  const firestoreDatabase = getFirestore();
+  const queryForConcert = await query(collection(firestoreDatabase, 'artists'), where(documentId(), 'in', concertObjectIds));
+  const querySnapshot = await getDocs(queryForConcert);
+  return querySnapshot.docs.map((currentDoc) => {
+    const data = currentDoc.data();
+    const result = {
+      ...data,
+      id: currentDoc.id,
+    };
+    return result as ArtistProperty;
+  });
+};
+
 export {
-  retrieveConcerts, retrieveConcert, createConcert, readConcertApi, readSingleConcertApiByTitle, createArtist, readArtistsApiBySearch,
+  retrieveConcerts, retrieveConcert, createConcert, readConcertApi, readSingleConcertApiByTitle, createArtist, readArtistsApiBySearch, readArtistsByIds, readConcertsByIds,
 };
