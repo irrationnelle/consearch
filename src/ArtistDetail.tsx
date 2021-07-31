@@ -21,7 +21,7 @@ const AvailableConcerts: FC<AvailableConcertsProps> = ({ concertIds }: Available
       border: '1px solid lightgray', borderRadius: '4px', display: 'flex', flexDirection: 'column',
     }}
     >
-      <span style={{ fontWeight: 'bolder', marginLeft: '5px' }}>Artist List</span>
+      <span style={{ fontWeight: 'bolder', marginLeft: '5px' }}>Concert List</span>
       <div style={{ display: 'flex' }}>
         {concerts?.map((concert) => (
           <button
