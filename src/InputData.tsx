@@ -8,7 +8,6 @@ import { useSearchArtists } from './ArtistSearch';
 export interface ConcertProperty {
     id?: string;
   title: string;
-  artist: string;
   artists: (string | undefined)[];
   stage: string;
   address: string;
@@ -27,7 +26,6 @@ const InputData: FC = (): ReactElement => {
   const mutation = useMutation(createConcert);
 
   const [title, setTitle] = useState<string>('');
-  const [artist, setArtist] = useState<string>('');
   const [genre, setGenre] = useState<string>('');
   const [address, setAddress] = useState<string>('');
   const [stage, setStage] = useState<string>('');
@@ -55,17 +53,6 @@ const InputData: FC = (): ReactElement => {
             }}
           />
         </label>
-        <label htmlFor="artist-input">
-          artist-input
-          <input
-            id="artist-input"
-            value={artist}
-            onChange={({ target: { value } }) => {
-              setArtist(value);
-            }}
-          />
-        </label>
-
         <div style={{
           border: '1px solid coral', width: '100%', height: '50%', display: 'flex', flexDirection: 'column',
         }}
@@ -215,13 +202,12 @@ const InputData: FC = (): ReactElement => {
       <div>
         <button
           type="button"
-          disabled={!(title && artist && genre && stage && address && date && (price > 0))}
+          disabled={!(title && genre && stage && address && date && (price > 0))}
           onClick={() => {
             mutation.mutate({
-              title, artist, genre, stage, address, date, price, artists: registeredArtists.map((registeredArtist) => registeredArtist.id),
+              title, genre, stage, address, date, price, artists: registeredArtists.map((registeredArtist) => registeredArtist.id),
             });
             setTitle('');
-            setArtist('');
             setAddress('');
             setDate('');
             setGenre('');
@@ -235,7 +221,6 @@ const InputData: FC = (): ReactElement => {
         && (
         <Contents>
           <span aria-label="title">{mutation.data?.title}</span>
-          <span aria-label="artist">{mutation.data?.artist}</span>
           <span aria-label="genre">{mutation.data?.genre}</span>
           <span aria-label="date">{mutation.data?.date}</span>
           <span aria-label="address">{mutation.data?.address}</span>

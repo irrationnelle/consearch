@@ -48,7 +48,6 @@ const createConcert = async (newConcert: ConcertProperty): Promise<ConcertProper
     console.error(e);
     return {
       title: '에러',
-      artist: '에러',
       artists: ['에러'],
       stage: '에러',
       address: '에러',

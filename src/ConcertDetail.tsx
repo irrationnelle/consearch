@@ -71,7 +71,6 @@ const ConcertDetail: FC<ConcertDetailProps> = ({ concerts: currentConcerts }: Co
         back
       </button>
       <span>{detailData?.title}</span>
-      <span>{detailData?.artist}</span>
       {detailData?.artists && detailData?.artists.length > 0 && <AvailableArtists artistIds={detailData.artists} />}
       <a href={`https://map.kakao.com/link/map/${addressPosition.y},${addressPosition.x}`}>{detailData?.address}</a>
       <ConcertLocationMap address={detailData?.address ?? ''} setPos={setAddressPosition} />
