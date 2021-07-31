@@ -10,6 +10,7 @@ import InputData from './InputData';
 import InitializationProvider from './contexts/InitializationContext';
 import ConcertSearch from './ConcertSearch';
 import ArtistInputData from './ArtistInputData';
+import ArtistSearch from './ArtistSearch';
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,9 @@ const App: FC = (): ReactElement => (
               <div>
                 <Link to="/input-artist">artist-input</Link>
               </div>
+              <div>
+                <Link to="/search-artist">artist-search</Link>
+              </div>
             </HeaderNav>
 
             <Switch>
@@ -50,6 +54,9 @@ const App: FC = (): ReactElement => (
               </Route>
               <Route path="/input-artist">
                 <ArtistInputData />
+              </Route>
+              <Route path="/search-artist">
+                <ArtistSearch />
               </Route>
             </Switch>
           </AppWrapper>

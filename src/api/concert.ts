@@ -123,6 +123,33 @@ const createArtist = async (newArtist: ArtistProperty): Promise<ArtistProperty> 
   }
 };
 
+const ARTIST_ALGOLIA_INDEX: string = process.env.REACT_APP_ARTIST_ALGOLIA_INDEX as string;
+
+const readArtistsApiBySearch = async (artistOption: string): Promise<ArtistProperty[]> => {
+  try {
+    const algoliaClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
+    const algoliaIndex = algoliaClient.initIndex(ARTIST_ALGOLIA_INDEX);
+    const { hits: searchResults } = await algoliaIndex.search(artistOption);
+    if (searchResults.length <= 0) return [];
+    const concertObjectIds = searchResults.map((searchResult) => searchResult.objectID);
+    const firestoreDatabase = getFirestore();
+    const queryForConcert = await query(collection(firestoreDatabase, 'artists'), where(documentId(), 'in', concertObjectIds));
+    const querySnapshot = await getDocs(queryForConcert);
+    return querySnapshot.docs.map((currentDoc) => {
+      const data = currentDoc.data();
+      const result = {
+        ...data,
+        id: currentDoc.id,
+      };
+      return result as ArtistProperty;
+    });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+    return [];
+  }
+};
+
 export {
-  retrieveConcerts, retrieveConcert, createConcert, readConcertApi, readSingleConcertApiByTitle, createArtist,
+  retrieveConcerts, retrieveConcert, createConcert, readConcertApi, readSingleConcertApiByTitle, createArtist, readArtistsApiBySearch,
 };

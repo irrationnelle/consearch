@@ -13,6 +13,7 @@ const Contents = styled.div`
 `;
 
 export interface ArtistProperty {
+  id?: string;
   name: string;
   genre: string;
   description: string;
